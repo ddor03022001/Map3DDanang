@@ -174,4 +174,90 @@ export class TextureGenerator {
     texture.repeat.set(1, 8);
     return texture;
   }
+
+  /**
+   * Generates a high-altitude satellite map texture rendering real Da Nang terrain from above
+   * Covers Son Tra rainforest, My Khe sandy beach, Han River mouth, and urban parcels
+   */
+  public static createSatelliteTerrainTexture(width = 1024, height = 1024): THREE.CanvasTexture {
+    const canvas = document.createElement('canvas');
+    canvas.width = width;
+    canvas.height = height;
+    const ctx = canvas.getContext('2d')!;
+
+    // 1. Base terrain tone (alluvial plain & city gray)
+    ctx.fillStyle = '#1c2628';
+    ctx.fillRect(0, 0, width, height);
+
+    // 2. East Sea ocean gradient (Right half of canvas)
+    const oceanGrad = ctx.createLinearGradient(width * 0.6, 0, width, 0);
+    oceanGrad.addColorStop(0, '#0a3d5e');
+    oceanGrad.addColorStop(0.3, '#072e48');
+    oceanGrad.addColorStop(1.0, '#041c2c');
+    ctx.fillStyle = oceanGrad;
+    ctx.fillRect(width * 0.62, 0, width * 0.38, height);
+
+    // 3. Sandy Golden Beach strip (My Khe & Non Nuoc coastline)
+    ctx.strokeStyle = '#d2b67f';
+    ctx.lineWidth = 14;
+    ctx.beginPath();
+    ctx.moveTo(width * 0.62, 0);
+    ctx.quadraticCurveTo(width * 0.61, height * 0.5, width * 0.63, height);
+    ctx.stroke();
+
+    // 4. Son Tra Peninsula (Lush tropical green in top-right corner)
+    ctx.fillStyle = '#1a4e2b';
+    ctx.beginPath();
+    ctx.ellipse(width * 0.72, height * 0.22, width * 0.18, height * 0.16, Math.PI / 6, 0, Math.PI * 2);
+    ctx.fill();
+
+    // Son Tra mountain ridge details
+    ctx.fillStyle = '#286a3d';
+    ctx.beginPath();
+    ctx.ellipse(width * 0.73, height * 0.21, width * 0.11, height * 0.09, Math.PI / 4, 0, Math.PI * 2);
+    ctx.fill();
+
+    // 5. Marble Mountains (Ngu Hanh Son limestone peaks in bottom-right)
+    ctx.fillStyle = '#3f5643';
+    for (let i = 0; i < 5; i++) {
+      const px = width * 0.65 + (i % 2) * 16;
+      const py = height * 0.72 + i * 18;
+      ctx.beginPath();
+      ctx.arc(px, py, 14, 0, Math.PI * 2);
+      ctx.fill();
+    }
+
+    // 6. Western mountains (Ba Na Hills range on far left)
+    const mountainGrad = ctx.createLinearGradient(0, 0, width * 0.3, 0);
+    mountainGrad.addColorStop(0, '#163321');
+    mountainGrad.addColorStop(0.8, '#1c3d28');
+    mountainGrad.addColorStop(1.0, 'transparent');
+    ctx.fillStyle = mountainGrad;
+    ctx.fillRect(0, 0, width * 0.32, height);
+
+    // 7. S-curved Han River channel & Da Nang Bay (Dark blue water corridor)
+    ctx.strokeStyle = '#0e4a70';
+    ctx.lineWidth = 22;
+    ctx.lineCap = 'round';
+    ctx.lineJoin = 'round';
+    ctx.beginPath();
+    ctx.moveTo(width * 0.52, height);
+    ctx.quadraticCurveTo(width * 0.5, height * 0.6, width * 0.5, height * 0.4);
+    ctx.quadraticCurveTo(width * 0.48, height * 0.28, width * 0.46, height * 0.22);
+    ctx.stroke();
+
+    // Da Nang Bay widening at river mouth
+    ctx.fillStyle = '#0a3a5a';
+    ctx.beginPath();
+    ctx.moveTo(width * 0.35, 0);
+    ctx.lineTo(width * 0.58, 0);
+    ctx.quadraticCurveTo(width * 0.52, height * 0.24, width * 0.44, height * 0.24);
+    ctx.quadraticCurveTo(width * 0.36, height * 0.2, width * 0.35, 0);
+    ctx.fill();
+
+    const texture = new THREE.CanvasTexture(canvas);
+    texture.wrapS = THREE.ClampToEdgeWrapping;
+    texture.wrapT = THREE.ClampToEdgeWrapping;
+    return texture;
+  }
 }

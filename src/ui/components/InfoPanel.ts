@@ -1,7 +1,16 @@
 import type { LandmarkPOI } from '@/config/coordinates';
 
+export interface InfoDisplayData {
+  badge: string;
+  title: string;
+  subtitle: string;
+  stats?: Array<{ label: string; value: string | number }>;
+  description: string;
+  descriptionEn?: string;
+}
+
 /**
- * Slide-out glassmorphic panel presenting detailed architectural & historical information of selected landmark
+ * Slide-out glassmorphic panel presenting detailed architectural, district & commune information
  */
 export class InfoPanel {
   public element: HTMLElement;
@@ -12,13 +21,55 @@ export class InfoPanel {
     this.element.className = 'dn-info-panel hidden';
   }
 
-  public show(landmark: LandmarkPOI): void {
+  public show(data: LandmarkPOI | InfoDisplayData): void {
     this.isVisible = true;
     this.element.classList.remove('hidden');
 
+    let badge = 'ĐỊA ĐIỂM';
+    let title = '';
+    let subtitle = '';
+    let stats: Array<{ label: string; value: string | number }> = [];
+    let description = '';
+    let descriptionEn = '';
+
+    if ('category' in data) {
+      // LandmarkPOI
+      badge = data.category.toUpperCase();
+      title = data.name;
+      subtitle = data.nameEn;
+      if (data.yearBuilt) {
+        stats.push({ label: 'Năm khánh thành', value: data.yearBuilt });
+      }
+      stats.push({
+        label: 'Tọa độ GPS',
+        value: `${data.lat.toFixed(4)}°N, ${data.lng.toFixed(4)}°E`,
+      });
+      description = data.description;
+      descriptionEn = data.descriptionEn;
+    } else {
+      // Generic InfoDisplayData
+      badge = data.badge;
+      title = data.title;
+      subtitle = data.subtitle;
+      stats = data.stats || [];
+      description = data.description;
+      descriptionEn = data.descriptionEn || '';
+    }
+
+    const statsHtml = stats
+      .map(
+        (s) => `
+        <div class="dn-stat-item">
+          <span class="dn-stat-label">${s.label}</span>
+          <span class="dn-stat-value">${s.value}</span>
+        </div>
+      `
+      )
+      .join('');
+
     this.element.innerHTML = `
       <div class="dn-info-header">
-        <div class="dn-info-badge">${landmark.category.toUpperCase()}</div>
+        <div class="dn-info-badge">${badge}</div>
         <button class="dn-info-close" id="dn-info-close" title="Đóng thông tin">
           <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
             <line x1="18" y1="6" x2="6" y2="18"></line>
@@ -27,29 +78,16 @@ export class InfoPanel {
         </button>
       </div>
 
-      <h2 class="dn-info-title">${landmark.name}</h2>
-      <div class="dn-info-subtitle">${landmark.nameEn}</div>
+      <h2 class="dn-info-title">${title}</h2>
+      <div class="dn-info-subtitle">${subtitle}</div>
 
       <div class="dn-info-stats">
-        ${
-          landmark.yearBuilt
-            ? `
-          <div class="dn-stat-item">
-            <span class="dn-stat-label">Năm khánh thành</span>
-            <span class="dn-stat-value">${landmark.yearBuilt}</span>
-          </div>
-        `
-            : ''
-        }
-        <div class="dn-stat-item">
-          <span class="dn-stat-label">Tọa độ GPS</span>
-          <span class="dn-stat-value">${landmark.lat.toFixed(4)}°N, ${landmark.lng.toFixed(4)}°E</span>
-        </div>
+        ${statsHtml}
       </div>
 
       <div class="dn-info-body">
-        <p class="dn-info-desc">${landmark.description}</p>
-        <p class="dn-info-desc-en">${landmark.descriptionEn}</p>
+        <p class="dn-info-desc">${description}</p>
+        ${descriptionEn ? `<p class="dn-info-desc-en">${descriptionEn}</p>` : ''}
       </div>
 
       <div class="dn-info-footer">

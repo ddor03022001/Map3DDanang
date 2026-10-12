@@ -2,8 +2,8 @@ import * as THREE from 'three';
 
 /**
  * High-performance InstancedMesh vegetation system for Da Nang
- * Features riverside shade trees along Bach Dang / Tran Hung Dao,
- * APEC park greenery, and tropical coconut palms along My Khe Beach
+ * Features riverside shade trees along Bach Dang, Nhu Nguyet, Tran Hung Dao,
+ * Thuan Phuoc bridge approach boulevards, and coastal palms along My Khe and Man Thai.
  */
 export class Vegetation {
   public group = new THREE.Group();
@@ -17,28 +17,29 @@ export class Vegetation {
   }
 
   /**
-   * 1. Dense shade trees along Bach Dang, Tran Phu, Tran Hung Dao boulevards and APEC Park
+   * 1. Dense shade trees along Bach Dang, Nhu Nguyet, Tran Hung Dao, Le Van Duyet,
+   * APEC Park, and Thuan Phuoc approach avenues (Nguyen Tat Thanh & Le Duc Tho)
    */
   private createRiversideShadeTrees(): void {
     const treePositions: [number, number, number][] = [];
 
-    // West Bank (Bach Dang riverside promenade)
-    for (let z = -240; z <= 120; z += 5) {
+    // West Bank Promenade (from Southern Tien Son all the way to Thuan Phuoc roundabout)
+    for (let z = -395; z <= 120; z += 5.5) {
       treePositions.push([-27.5, 0.4, z]);
-      if (Math.random() > 0.4) {
-        treePositions.push([-29.5, 0.4, z + (Math.random() - 0.5) * 2]);
+      if (Math.random() > 0.45) {
+        treePositions.push([-30.5, 0.4, z + (Math.random() - 0.5) * 2]);
       }
     }
 
-    // East Bank (Tran Hung Dao riverside promenade)
-    for (let z = -240; z <= 120; z += 5) {
+    // East Bank Promenade (from Southern Cam Le up to Thuan Phuoc roundabout)
+    for (let z = -395; z <= 120; z += 5.5) {
       treePositions.push([27.5, 0.4, z]);
-      if (Math.random() > 0.4) {
-        treePositions.push([29.5, 0.4, z + (Math.random() - 0.5) * 2]);
+      if (Math.random() > 0.45) {
+        treePositions.push([30.5, 0.4, z + (Math.random() - 0.5) * 2]);
       }
     }
 
-    // APEC Sculpture Park cluster (near West abutment of Dragon Bridge)
+    // APEC Sculpture Park cluster
     for (let i = 0; i < 45; i++) {
       const px = -35 + (Math.random() - 0.5) * 22;
       const pz = 18 + (Math.random() - 0.5) * 26;
@@ -53,11 +54,22 @@ export class Vegetation {
       treePositions.push([x, 0.4, 0]);
     }
 
+    // Thuan Phuoc West approach: Nguyen Tat Thanh Bay Avenue
+    for (let x = -200; x <= -85; x += 9) {
+      treePositions.push([x, 0.4, -394]);
+      treePositions.push([x, 0.4, -386]);
+    }
+
+    // Thuan Phuoc East approach: Le Duc Tho Avenue
+    for (let x = 85; x <= 195; x += 9) {
+      treePositions.push([x, 0.4, -394]);
+      treePositions.push([x, 0.4, -386]);
+    }
+
     const count = treePositions.length;
 
-    // Stylized low-poly shade tree canopy (lush tropical green cone/dodecahedron)
     const canopyGeo = new THREE.DodecahedronGeometry(1.6, 1);
-    canopyGeo.translate(0, 3.2, 0); // Elevate above trunk
+    canopyGeo.translate(0, 3.2, 0);
 
     const canopyMat = new THREE.MeshStandardMaterial({
       color: 0x226b34,
@@ -81,7 +93,6 @@ export class Vegetation {
       dummy.updateMatrix();
       this.shadeTrees!.setMatrixAt(idx, dummy.matrix);
 
-      // Subtle tropical green hue variation
       color.setHSL(0.3 + Math.random() * 0.05, 0.55, 0.22 + Math.random() * 0.08);
       this.shadeTrees!.setColorAt(idx, color);
     });
@@ -92,16 +103,15 @@ export class Vegetation {
   }
 
   /**
-   * 2. Tropical Coconut / Palm trees along Vo Nguyen Giap boulevard & My Khe beach
+   * 2. Tropical Coconut / Palm trees along coastal boulevards & beaches
+   * Extended to cover My Khe, Man Thai, and Tho Quang bayside
    */
   private createCoastalPalmTrees(): void {
     const palmPositions: [number, number, number][] = [];
 
-    // Continuous coastal palm grove along Vo Nguyen Giap boulevard & My Khe sand
-    for (let z = -280; z <= 180; z += 4.5) {
-      // Boulevard sidewalk palm row
+    // Continuous coastal palm grove along Vo Nguyen Giap and Hoang Sa
+    for (let z = -410; z <= 180; z += 4.5) {
       palmPositions.push([172, 0.4, z]);
-      // Beachside sand palm clusters
       palmPositions.push([178, 0.3, z + (Math.random() - 0.5) * 3]);
       if (Math.random() > 0.5) {
         palmPositions.push([184, 0.2, z + (Math.random() - 0.5) * 4]);
@@ -110,7 +120,6 @@ export class Vegetation {
 
     const count = palmPositions.length;
 
-    // Coconut palm frond canopy
     const palmGeo = new THREE.ConeGeometry(2.2, 1.8, 6);
     palmGeo.translate(0, 4.2, 0);
 
@@ -133,7 +142,7 @@ export class Vegetation {
       const s = 0.9 + Math.random() * 0.4;
       dummy.scale.set(s, s * (1.0 + Math.random() * 0.3), s);
       dummy.rotation.y = Math.random() * Math.PI * 2;
-      dummy.rotation.z = (Math.random() - 0.5) * 0.15; // Natural palm lean towards sea
+      dummy.rotation.z = (Math.random() - 0.5) * 0.15;
       dummy.updateMatrix();
       this.palmTrees!.setMatrixAt(idx, dummy.matrix);
 

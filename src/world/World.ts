@@ -7,6 +7,8 @@ import { CityGrid } from './CityGrid';
 import { Buildings } from './Buildings';
 import { Vegetation } from './Vegetation';
 import { LandmarkManager } from './landmarks/LandmarkManager';
+import { DistrictManager } from './districts';
+import { LabelManager } from './labels/LabelManager';
 import type { TimeOfDay } from '@/config/constants';
 
 /**
@@ -22,6 +24,8 @@ export class World {
   public buildings: Buildings;
   public vegetation: Vegetation;
   public landmarks: LandmarkManager;
+  public districtManager: DistrictManager;
+  public labelManager: LabelManager;
 
   private engine: Engine;
 
@@ -56,6 +60,14 @@ export class World {
     this.landmarks = new LandmarkManager();
     this.group.add(this.landmarks.group);
 
+    // 8. Modular Provincial Districts (Hai Chau, Son Tra, Ngu Hanh Son, Hoa Vang / Ba Na)
+    this.districtManager = new DistrictManager();
+    this.group.add(this.districtManager.group);
+
+    // 9. 3D Floating Labels System (duancuulong.com style)
+    this.labelManager = new LabelManager();
+    this.group.add(this.labelManager.group);
+
     // Add everything to main Scene
     this.engine.sceneManager.add(this.group);
 
@@ -77,5 +89,6 @@ export class World {
     this.cityGrid.setNightIntensity(nightGlow);
     this.buildings.setNightGlow(nightGlow);
     this.landmarks.update(delta, elapsed, nightGlow);
+    this.districtManager.update(delta, elapsed, nightGlow);
   }
 }

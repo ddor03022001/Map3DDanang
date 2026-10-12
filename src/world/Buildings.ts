@@ -16,8 +16,7 @@ interface BuildingInstance {
 
 /**
  * Authentic Vietnamese urban architecture system modeling Da Nang
- * Distinguishes between coastal luxury glass hotels, commercial towers,
- * and dense residential shophouses with terracotta/blue roof tones and warm plaster facades.
+ * Covers Hai Chau, Son Tra, My Khe coastal strip, and Thuan Phuoc & Nai Hien Dong bridgehead districts.
  */
 export class Buildings {
   public group = new THREE.Group();
@@ -37,7 +36,6 @@ export class Buildings {
       metalness: 0.25,
     });
 
-    // Box geometry with pivot at the base
     const geometry = new THREE.BoxGeometry(1, 1, 1);
     geometry.translate(0, 0.5, 0);
 
@@ -80,7 +78,7 @@ export class Buildings {
 
     // 2. Vietnamese Shophouses (Warm Plaster & Roof Accents)
     const shophousePalettes = [
-      new THREE.Color(0xf4ebd9), // Warm Hanoi/Da Nang French yellow plaster
+      new THREE.Color(0xf4ebd9), // Warm French yellow plaster
       new THREE.Color(0xe8d5b5), // Cream beige plaster
       new THREE.Color(0xd9755b), // Terracotta clay red roof accent
       new THREE.Color(0xb8432f), // Deep baked tile orange-red
@@ -96,7 +94,7 @@ export class Buildings {
       new THREE.Color(0xe0e6ed), // Clean metallic panel
     ];
 
-    // Zone 1: Hai Chau Urban Core (West Bank: Bach Dang, Tran Phu, Le Duan, Nguyen Van Linh)
+    // Zone 1: Hai Chau Central Core (West Bank: Bach Dang, Tran Phu, Le Duan, Nguyen Van Linh)
     this.populateZone(buildings, {
       minX: -130,
       maxX: -32,
@@ -124,7 +122,7 @@ export class Buildings {
       type: 'shophouse',
     });
 
-    // Zone 3: Premier Coastal Resort & Hotel Strip (Vo Nguyen Giap / My Khe Beach)
+    // Zone 3: Premier Coastal Resort Strip (Vo Nguyen Giap / My Khe Beach)
     this.populateZone(buildings, {
       minX: 160,
       maxX: 195,
@@ -132,7 +130,7 @@ export class Buildings {
       maxZ: 120,
       density: 0.72,
       baseHeight: 18,
-      maxHeight: 46, // Tall 25-35 floor beachfront hotel towers
+      maxHeight: 46, // 25-35 floor beachfront hotels
       avgSize: 7.2,
       palettes: hotelPalettes,
       type: 'hotel_tower',
@@ -146,10 +144,53 @@ export class Buildings {
       maxZ: 260,
       density: 0.65,
       baseHeight: 3.5,
-      maxHeight: 11, // Tube house residential
+      maxHeight: 11,
       avgSize: 4.0,
       palettes: shophousePalettes,
       type: 'shophouse',
+    });
+
+    // === THUAN PHUOC BRIDGE AREA URBAN FABRIC ===
+    // Zone 5: Thuan Phuoc & Thanh Binh Sector (West Bank of Thuan Phuoc Bridge)
+    this.populateZone(buildings, {
+      minX: -160,
+      maxX: -36,
+      minZ: -415,
+      maxZ: -200,
+      density: 0.82,
+      baseHeight: 4.0,
+      maxHeight: 18, // Waterfront residential blocks & shophouses
+      avgSize: 4.6,
+      palettes: [...shophousePalettes, ...commercialPalettes],
+      type: 'shophouse',
+    });
+
+    // Zone 6: Nai Hien Dong & Tho Quang Urban Sector (East Bank of Thuan Phuoc Bridge)
+    this.populateZone(buildings, {
+      minX: 36,
+      maxX: 160,
+      minZ: -415,
+      maxZ: -200,
+      density: 0.84,
+      baseHeight: 4.2,
+      maxHeight: 22, // Apartments & neighborhood shophouses
+      avgSize: 4.8,
+      palettes: shophousePalettes,
+      type: 'shophouse',
+    });
+
+    // Zone 7: North Coastal Hotel Strip (Man Thai / Tho Quang leading towards Son Tra)
+    this.populateZone(buildings, {
+      minX: 162,
+      maxX: 195,
+      minZ: -415,
+      maxZ: -240,
+      density: 0.7,
+      baseHeight: 14,
+      maxHeight: 36,
+      avgSize: 6.8,
+      palettes: hotelPalettes,
+      type: 'hotel_tower',
     });
 
     return buildings;
@@ -174,8 +215,12 @@ export class Buildings {
 
     for (let x = options.minX; x < options.maxX; x += step) {
       for (let z = options.minZ; z < options.maxZ; z += step) {
-        // Clear Han River channel
-        if (Math.abs(x) < 28 && z > -350 && z < 210) continue;
+        // Clear Han River channel from upstream south all the way to Da Nang Bay estuary
+        if (Math.abs(x) < 32 && z > -425 && z < 210) continue;
+
+        // Clear roundabouts footprint at Thuan Phuoc bridgeheads
+        if (Math.hypot(x - (-78), z - (-390)) < 14) continue;
+        if (Math.hypot(x - 78, z - (-390)) < 14) continue;
 
         if (Math.random() > options.density) continue;
 
