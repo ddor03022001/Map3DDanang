@@ -31,46 +31,35 @@ export class ChuLaiOverpass {
       color: 0x2e6b3e,
       roughness: 0.9,
     });
+    const stripeMat = new THREE.MeshBasicMaterial({ color: 0xffffff });
 
-    // Outer roundabout circle (radius: 24)
+    // Outer roundabout circle (radius: 12 to 24) sitting cleanly on top of arterial intersection
     const ringGeo = new THREE.RingGeometry(12, 24, 48);
     ringGeo.rotateX(-Math.PI / 2);
     const ring = new THREE.Mesh(ringGeo, roadMat);
-    ring.position.y = 0.36;
+    ring.position.y = 0.40;
     ring.receiveShadow = true;
     this.group.add(ring);
+
+    // Dashed circular guide stripes on roundabout
+    const dashCount = 24;
+    for (let i = 0; i < dashCount; i++) {
+      const angle = (i / dashCount) * Math.PI * 2;
+      const stripeGeo = new THREE.PlaneGeometry(0.3, 2.2);
+      stripeGeo.rotateX(-Math.PI / 2);
+      stripeGeo.rotateY(-angle);
+      const stripe = new THREE.Mesh(stripeGeo, stripeMat);
+      stripe.position.set(Math.cos(angle) * 18, 0.41, Math.sin(angle) * 18);
+      this.group.add(stripe);
+    }
 
     // Center grass island (radius: 12)
     const islandGeo = new THREE.CircleGeometry(11.8, 36);
     islandGeo.rotateX(-Math.PI / 2);
     const island = new THREE.Mesh(islandGeo, grassMat);
-    island.position.y = 0.38;
+    island.position.y = 0.42;
     island.receiveShadow = true;
     this.group.add(island);
-
-    // Highway 1A North-South thoroughfare through interchange
-    const ql1aGeo = new THREE.PlaneGeometry(8, 120);
-    ql1aGeo.rotateX(-Math.PI / 2);
-    const ql1a = new THREE.Mesh(ql1aGeo, roadMat);
-    ql1a.position.set(0, 0.35, 0);
-    ql1a.receiveShadow = true;
-    this.group.add(ql1a);
-
-    // East thoroughfare leading into THACO Complex and Chu Lai Port
-    const portRoadGeo = new THREE.PlaneGeometry(60, 8);
-    portRoadGeo.rotateX(-Math.PI / 2);
-    const portRoad = new THREE.Mesh(portRoadGeo, roadMat);
-    portRoad.position.set(30, 0.35, 0);
-    portRoad.receiveShadow = true;
-    this.group.add(portRoad);
-
-    // West thoroughfare connecting to Da Nang - Quang Ngai Expressway
-    const expRoadGeo = new THREE.PlaneGeometry(60, 7.5);
-    expRoadGeo.rotateX(-Math.PI / 2);
-    const expRoad = new THREE.Mesh(expRoadGeo, roadMat);
-    expRoad.position.set(-30, 0.35, 0);
-    expRoad.receiveShadow = true;
-    this.group.add(expRoad);
   }
 
   /**

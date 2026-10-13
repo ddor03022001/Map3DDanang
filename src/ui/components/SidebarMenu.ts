@@ -14,6 +14,7 @@ interface SidebarMenuProps {
   cameraManager: CameraManager;
   onSelectInfo: (info: InfoDisplayData) => void;
   onModeChange?: (mode: 'study' | 'explore') => void;
+  onSelectViewpoint?: (item: ViewpointItem) => void;
 }
 
 export const VIEWPOINTS: ViewpointItem[] = [
@@ -40,8 +41,8 @@ export const VIEWPOINTS: ViewpointItem[] = [
     id: 'nui-thanh',
     name: 'Huyện Núi Thành',
     districtId: 'nui-thanh',
-    position: [220, 180, 880],
-    target: [260, 10, 720],
+    position: [150, 680, 420],
+    target: [150, 0, 770],
     info: {
       badge: 'HUYỆN ĐỊA PHƯƠNG',
       title: 'Huyện Núi Thành',
@@ -60,7 +61,7 @@ export const VIEWPOINTS: ViewpointItem[] = [
     id: 'tam-hiep',
     name: 'Xã Tam Hiệp - toàn cảnh',
     districtId: 'nui-thanh',
-    position: [250, 95, 620],
+    position: [250, 115, 610],
     target: [280, 6, 720],
     info: {
       badge: 'XÃ TRỌNG ĐIỂM',
@@ -71,14 +72,68 @@ export const VIEWPOINTS: ViewpointItem[] = [
         { label: 'Đặc thù', value: 'KCN Chu Lai & Cầu vượt 2 tầng' },
       ],
       description:
-        'Xã Tam Hiệp là trái tim của Khu Kinh Tế Mở Chu Lai. Nơi đây tập trung các nhà máy sản xuất lắp ráp ô tô THACO, cầu vượt vòng xuyến 2 tầng Cây Xương Rồng và bến cảng container.',
+        'Xã Tam Hiệp là trái tim của Khu Kinh Tế Mở Chu Lai. Nơi đây hội tụ từ vùng rừng đồi keo bát úp phía Tây, làng cổ Thôn Thái Xuân, Chùa Tam Hiệp đến Đại phức hợp ô tô THACO, Cầu vượt Cây Xương Rồng, Đầm tôm và Cảng biển quốc tế Chu Lai.',
+    },
+  },
+  {
+    id: 'doi-keo-tam-hiep',
+    name: 'Rừng đồi keo Tây Tam Hiệp',
+    districtId: 'nui-thanh',
+    position: [30, 45, 640],
+    target: [70, 12, 715],
+    info: {
+      badge: 'RỪNG NÚI & ĐẤT ĐỎ',
+      title: 'Vùng Gò Đồi Keo Tây Tam Hiệp (128m)',
+      subtitle: 'Rừng keo lá tràm, đất đỏ bazan giáp Tam Mỹ Tây',
+      stats: [
+        { label: 'Độ cao', value: '128 m' },
+        { label: 'Cây trồng', value: 'Keo lá tràm, bạch đàn, sắn' },
+      ],
+      description:
+        'Vùng đồi bát úp phía Tây xã Tam Hiệp với những cánh rừng keo tràm bạt ngàn, đường đất đỏ bazan uốn lượn, suối nước tự nhiên và chòi canh lửa rừng trên đỉnh đồi.',
+    },
+  },
+  {
+    id: 'thon-thai-xuan',
+    name: 'Thôn Thái Xuân & Chùa Tam Hiệp',
+    districtId: 'nui-thanh',
+    position: [110, 26, 625],
+    target: [142, 4, 680],
+    info: {
+      badge: 'LÀNG QUÊ TRUYỀN THỐNG',
+      title: 'Làng Quê Thôn Thái Xuân & Chùa Cổ',
+      subtitle: 'Mái nhà ngói đỏ, sân phơi gạch & Đình Làng Tam Hiệp',
+      stats: [
+        { label: 'Kiến trúc', value: 'Nhà cấp 4 chữ L, ngói đỏ, Chùa cong mái' },
+        { label: 'Cây cối', value: 'Cây đa, dừa, chuối, hàng cau' },
+      ],
+      description:
+        'Khu dân cư cổ kính và thanh bình của xã Tam Hiệp: Những ngôi nhà cấp 4 chữ L ngói đỏ rêu phong, sân gạch đỏ phơi thóc, bồn nước Inox, Chùa Tam Hiệp 2 tầng mái cong chạm rồng và cây bồ đề đại thụ sum suê.',
+    },
+  },
+  {
+    id: 'dam-tom-tam-hiep',
+    name: 'Đầm tôm sông Trường Giang',
+    districtId: 'nui-thanh',
+    position: [350, 36, 715],
+    target: [395, 2, 760],
+    info: {
+      badge: 'THỦY VỰC & NUÔI TÔM',
+      title: 'Đầm Nuôi Tôm Sinh Thái Tam Hiệp',
+      subtitle: 'Hệ thống vuông tôm, thuyền thúng & rừng phi lao ven sông',
+      stats: [
+        { label: 'Mô hình', value: 'Nuôi tôm thẻ chân trắng công nghệ cao' },
+        { label: 'Hệ sinh thái', value: 'Sông Trường Giang & Vịnh An Hòa' },
+      ],
+      description:
+        'Hệ thống 8 vuông tôm thương phẩm với guồng quạt oxy xoay tít tung bọt trắng, chòi canh tôm trên cọc gỗ, cầu tre, thuyền thúng nan tre và rặng phi lao chắn gió ven cồn cát.',
     },
   },
   {
     id: 'cay-xuong-rong',
     name: 'Cầu vượt Cây Xương Rồng',
     districtId: 'nui-thanh',
-    position: [192, 32, 685],
+    position: [205, 45, 660],
     target: [220, 4, 720],
     info: {
       badge: 'CÔNG TRÌNH GIAO THÔNG',
@@ -129,8 +184,8 @@ export const VIEWPOINTS: ViewpointItem[] = [
     id: 'cang-chu-lai',
     name: 'Cảng Biển Chu Lai',
     districtId: 'nui-thanh',
-    position: [520, 52, 660],
-    target: [490, 8, 720],
+    position: [340, 50, 660],
+    target: [310, 8, 725],
     info: {
       badge: 'CẢNG BIỂN NƯỚC SÂU',
       title: 'Cảng Biển Quốc Tế Chu Lai & Tam Hiệp',
@@ -147,8 +202,8 @@ export const VIEWPOINTS: ViewpointItem[] = [
     id: 'duong-sat',
     name: 'Đường sắt Bắc Nam',
     districtId: 'nui-thanh',
-    position: [195, 22, 690],
-    target: [208, 2, 700],
+    position: [175, 40, 675],
+    target: [208, 2, 710],
     info: {
       badge: 'HẠ TẦNG GIAO THÔNG',
       title: 'Tuyến Đường Sắt Bắc - Nam & Ga Chu Lai',
@@ -186,46 +241,127 @@ export const VIEWPOINTS: ViewpointItem[] = [
     },
   },
   {
-    id: 'san-bay-chu-lai',
-    name: 'Sân bay Chu Lai',
+    id: 'nui-thanh-town',
+    name: 'Thị trấn Núi Thành',
     districtId: 'nui-thanh',
-    position: [260, 85, 870],
-    target: [280, 2, 915],
+    position: [180, 68, 765],
+    target: [220, 4, 825],
     info: {
-      badge: 'HÀNG KHÔNG',
+      badge: 'ĐÔ THỊ TRUNG TÂM',
+      title: 'Thị Trấn Núi Thành & Sông An Tân',
+      subtitle: 'Trung tâm chính trị, văn hóa, thương mại huyện',
+      stats: [
+        { label: 'Diện tích', value: '4.5 km²' },
+        { label: 'Giao thông', value: 'Cầu An Tân, Ga Núi Thành, QL1A' },
+      ],
+      description:
+        'Trung tâm huyện Núi Thành sầm uất ven dòng sông An Tân hiền hòa, với trụ sở UBND huyện, quảng trường trung tâm, chợ thương mại và nhà ga xe lửa Bắc - Nam.',
+    },
+  },
+  {
+    id: 'tuong-dai-nui-thanh',
+    name: 'Tượng đài Chiến thắng',
+    districtId: 'nui-thanh',
+    position: [225, 24, 765],
+    target: [265, 12, 805],
+    info: {
+      badge: 'DI TÍCH LỊCH SỬ',
+      title: 'Tượng Đài Chiến Thắng Núi Thành',
+      subtitle: 'Di tích lịch sử cấp quốc gia trên đồi cát Núi Thành',
+      stats: [
+        { label: 'Sự kiện', value: 'Chiến thắng 26/5/1965 vang dội' },
+        { label: 'Độ cao đồi', value: '14m trên đỉnh đồi lộng gió' },
+      ],
+      description:
+        'Tượng đài sừng sững trên đỉnh đồi cát lịch sử, ghi dấu mốc son trận đầu đánh Mỹ và thắng Mỹ của quân dân Núi Thành - Quảng Nam kiên cường.',
+    },
+  },
+  {
+    id: 'san-bay-chu-lai',
+    name: 'Sân bay Quốc tế Chu Lai',
+    districtId: 'nui-thanh',
+    position: [220, 58, 885],
+    target: [280, 2, 930],
+    info: {
+      badge: 'CẢNG HÀNG KHÔNG',
       title: 'Cảng Hàng Không Quốc Tế Chu Lai',
       subtitle: 'Sân bay có đường băng dài nhất Việt Nam (4.050m)',
-      stats: [{ label: 'Đường băng', value: '4.050m x 45m' }],
+      stats: [
+        { label: 'Đường băng', value: '4.050m x 45m (Runway 14/32)' },
+        { label: 'Đài ATC', value: 'Tháp chỉ huy không lưu 42m' },
+      ],
       description:
-        'Cảng hàng không có diện tích lớn nhất cả nước (hơn 2.000 ha), định hướng trở thành trung tâm trung chuyển hàng hóa và sửa chữa máy bay quốc tế.',
+        'Sân bay có diện tích lớn nhất nước (hơn 2.000 ha), đài kiểm soát không lưu hiện đại, nhà ga hành khách và đường băng đón các dòng tàu bay thân rộng quốc tế.',
     },
   },
   {
     id: 'tam-hai',
-    name: 'Xã Đảo Tam Hải',
+    name: 'Xã Đảo Tam Hải & Bàn Than',
     districtId: 'nui-thanh',
-    position: [330, 80, 820],
-    target: [320, 2, 850],
+    position: [445, 120, 770],
+    target: [445, 4, 875],
     info: {
-      badge: 'DANH THẮNG BIỂN ĐẢO',
-      title: 'Xã Đảo Tam Hải',
-      subtitle: 'Ghềnh đá đen Bàn Than & Rặng dừa biển',
+      badge: 'KỲ QUAN BIỂN ĐẢO',
+      title: 'Xã Đảo Tam Hải & Ghềnh Đá Đen Bàn Than',
+      subtitle: 'Ốc đảo dừa miền Trung & Tuyệt tác trầm tích',
+      stats: [
+        { label: 'Địa hình', value: 'Biệt lập 3 mặt sông, 1 mặt biển Đông' },
+        { label: 'Thắng cảnh', value: 'Ghềnh Bàn Than, Cổng Tò Vò, Hòn Mang' },
+      ],
       description:
-        'Xã đảo biệt lập được bao bọc bởi một mặt biển và ba mặt sông, nổi tiếng với di tích ghềnh đá Bàn Than đen tuyền kỳ ảo hàng triệu năm tuổi.',
+        'Kỳ quan trầm tích đá đen nhánh triệu năm tuổi, vòm Cổng Tò Vò tự nhiên giữa biển sóng bạc đầu, những rặng dừa xiêm xanh mát và những chiếc thuyền thúng mộc mạc của làng chài.',
     },
   },
   {
-    id: 'ruong-lua-tam-hiep',
-    name: 'Ruộng lúa Tam Hiệp',
+    id: 'cang-ky-ha',
+    name: 'Cảng Kỳ Hà & Bến Cá',
     districtId: 'nui-thanh',
-    position: [120, 45, 680],
-    target: [180, 2, 720],
+    position: [290, 50, 810],
+    target: [320, 4, 840],
     info: {
-      badge: 'NÔNG NGHIỆP',
-      title: 'Đồng Lúa Duyên Hải Tam Hiệp',
-      subtitle: 'Vùng canh tác truyền thống ven chân đồi',
+      badge: 'CẢNG BIỂN & THỦY SẢN',
+      title: 'Cảng Kỳ Hà & Bến Cá Tam Quang',
+      subtitle: 'Âu thuyền Vịnh An Hòa & Đội tàu đánh bắt xa bờ',
+      stats: [
+        { label: 'Vai trò', value: 'Cảng tổng hợp & Bến cá lớn nhất huyện' },
+      ],
       description:
-        'Những ô ruộng lúa bàn cờ trải dài xen kẽ giữa các dải cát ven biển và triền đồi đất đỏ Núi Thành.',
+        'Cảng tổng hợp Kỳ Hà và bến cá Tam Quang sầm uất nằm bên vịnh An Hòa, nơi tập kết hải sản từ ngư trường Hoàng Sa - Trường Sa của hàng trăm tàu thuyền công suất lớn.',
+    },
+  },
+  {
+    id: 'ho-giang-thom',
+    name: 'Thác Hố Giang Thơm (11 Tầng)',
+    districtId: 'nui-thanh',
+    position: [-20, 32, 810],
+    target: [15, 6, 825],
+    info: {
+      badge: 'DANH THẮNG NÚI RỪNG',
+      title: 'Thác Hố Giang Thơm (Hố Khế)',
+      subtitle: 'Kiệt tác thác nước 11 tầng giữa đại ngàn Tây Núi Thành',
+      stats: [
+        { label: 'Quy mô', value: '11 tầng thác đổ quanh năm' },
+        { label: 'Hồ sinh thái', value: 'Hồ Hố Khế & rừng nguyên sinh' },
+      ],
+      description:
+        'Thác nước tự nhiên 11 tầng tuyệt đẹp đổ bọt trắng xóa qua các phiến đá hoa cương cổ đại, tạo thành những hồ bơi tự nhiên trong vắt giữa rừng già nguyên sinh Tam Mỹ Tây.',
+    },
+  },
+  {
+    id: 'dinh-hon-tau',
+    name: 'Đỉnh Núi Hòn Tàu 953m',
+    districtId: 'nui-thanh',
+    position: [-80, 85, 780],
+    target: [-50, 30, 820],
+    info: {
+      badge: 'ĐỈNH NÚI CAO NHẤT',
+      title: 'Dãy Núi Hòn Tàu (953m)',
+      subtitle: 'Nóc nhà phía Tây che chở Núi Thành',
+      stats: [
+        { label: 'Độ cao', value: '953 m so với mực nước biển' },
+      ],
+      description:
+        'Dãy núi cao hùng vĩ nhất của huyện Núi Thành, ranh giới tự nhiên giữa đồng bằng ven biển và vùng rừng núi Trường Sơn, quanh năm mây mù bao phủ.',
     },
   },
   {
@@ -386,28 +522,343 @@ export const VIEWPOINTS: ViewpointItem[] = [
   },
 ];
 
+export const NUI_THANH_COMMUNES: ViewpointItem[] = [
+  {
+    id: 'commune-nui-thanh',
+    name: '🏛️ TT. Núi Thành',
+    districtId: 'nui-thanh',
+    position: [185, 125, 690],
+    target: [185, 4, 800],
+    info: {
+      badge: 'ĐÔ THỊ TRUNG TÂM',
+      title: 'Thị Trấn Núi Thành & Sông An Tân',
+      subtitle: 'Trung tâm chính trị, văn hóa, thương mại huyện',
+      stats: [
+        { label: 'Diện tích', value: '4.5 km²' },
+        { label: 'Đặc trưng', value: 'Cầu An Tân, Ga Núi Thành, Trụ sở UBND huyện' },
+      ],
+      description:
+        'Trung tâm hành chính huyện Núi Thành bên bờ sông An Tân, sở hữu trụ sở UBND huyện, quảng trường trung tâm, chợ thương mại sầm uất và cầu An Tân bắc qua sông.',
+    },
+  },
+  {
+    id: 'commune-tam-hiep',
+    name: '🏭 Xã Tam Hiệp',
+    districtId: 'nui-thanh',
+    position: [255, 160, 600],
+    target: [255, 4, 730],
+    info: {
+      badge: 'TRUNG TÂM CÔNG NGHIỆP',
+      title: 'Xã Tam Hiệp',
+      subtitle: 'Trái tim Khu Kinh Tế Mở Chu Lai & Ô tô THACO',
+      stats: [
+        { label: 'Diện tích', value: '42.1 km²' },
+        { label: 'Đặc trưng', value: 'KCN THACO, Cầu vượt Cây Xương Rồng, Cảng Chu Lai' },
+      ],
+      description:
+        'Trung tâm công nghiệp đầu tàu với Đại phức hợp ô tô THACO Chu Lai hơn 1.200 ha, nút giao cầu vượt 2 tầng Cây Xương Rồng, cảng Chu Lai, đầm tôm và làng cổ Thôn Thái Xuân.',
+    },
+  },
+  {
+    id: 'commune-tam-hai',
+    name: '🏝️ Xã Tam Hải',
+    districtId: 'nui-thanh',
+    position: [445, 140, 765],
+    target: [445, 2, 875],
+    info: {
+      badge: 'KỲ QUAN BIỂN ĐẢO',
+      title: 'Xã Đảo Tam Hải',
+      subtitle: 'Ốc đảo dừa miền Trung & Tuyệt tác Ghềnh Bàn Than',
+      stats: [
+        { label: 'Diện tích', value: '15.6 km²' },
+        { label: 'Đặc trưng', value: 'Ghềnh Bàn Than, Cổng Tò Vò, Rừng dừa xiêm' },
+      ],
+      description:
+        'Xã đảo biệt lập ba bề sông một bề biển Đông, nổi tiếng với kỳ quan trầm tích đá đen Bàn Than hàng triệu năm tuổi, vòm đá Cổng Tò Vò tự nhiên và những rặng dừa xanh ngát soi bóng biển.',
+    },
+  },
+  {
+    id: 'commune-tam-quang',
+    name: '🚢 Xã Tam Quang',
+    districtId: 'nui-thanh',
+    position: [320, 135, 715],
+    target: [320, 3, 815],
+    info: {
+      badge: 'HÀNG HẢI & NGHỀ CÁ',
+      title: 'Xã Tam Quang (Cảng Kỳ Hà)',
+      subtitle: 'Cửa ngõ hàng hải & Bến cá sầm uất Vịnh An Hòa',
+      stats: [
+        { label: 'Diện tích', value: '11.4 km²' },
+        { label: 'Đặc trưng', value: 'Cảng tổng hợp Kỳ Hà, Bến cá Tam Quang, Vịnh An Hòa' },
+      ],
+      description:
+        'Địa bàn Cảng biển tổng hợp Kỳ Hà đón tàu bách hóa quốc tế, âu thuyền Vịnh An Hòa kín gió và bến cá Tam Quang sầm uất với hàng trăm tàu đánh bắt xa bờ Hoàng Sa - Trường Sa.',
+    },
+  },
+  {
+    id: 'commune-tam-nghia',
+    name: '✈️ Xã Tam Nghĩa',
+    districtId: 'nui-thanh',
+    position: [270, 160, 840],
+    target: [270, 3, 955],
+    info: {
+      badge: 'CẢNG HÀNG KHÔNG',
+      title: 'Xã Tam Nghĩa (Sân Bay Chu Lai)',
+      subtitle: 'Sân bay Quốc tế Chu Lai & Cửa ngõ Dốc Sỏi',
+      stats: [
+        { label: 'Diện tích', value: '51.6 km²' },
+        { label: 'Đặc trưng', value: 'Đường băng dài nhất VN 4.050m, Đài kiểm soát ATC 42m' },
+      ],
+      description:
+        'Cửa ngõ phía Nam huyện Núi Thành tiếp giáp Quảng Ngãi, nơi đặt Sân bay Quốc tế Chu Lai diện tích lớn nhất nước với đường băng 4.050m, đài kiểm soát không lưu hiện đại và nút giao Dốc Sỏi.',
+    },
+  },
+  {
+    id: 'commune-tam-tra',
+    name: '🏔️ Xã Tam Trà',
+    districtId: 'nui-thanh',
+    position: [-95, 26, 815],
+    target: [-120, 7, 870],
+    info: {
+      badge: 'VÙNG CAO ĐỒNG BÀO KOR',
+      title: 'Xã Vùng Cao Tam Trà',
+      subtitle: 'Nóc nhà Hòn Tàu 953m, Bản làng nhà sàn & Đồi quế',
+      stats: [
+        { label: 'Diện tích', value: '97.1 km²' },
+        { label: 'Đặc trưng', value: 'Đỉnh núi Hòn Tàu 953m, Nhà sàn đồng bào Cor, Cầu treo' },
+      ],
+      description:
+        'Xã vùng cao có diện tích lớn nhất huyện Núi Thành, tựa lưng vào đỉnh Hòn Tàu cao 953m hùng vĩ, những nếp nhà sàn mái tranh mộc mạc của đồng bào Cor, cầu treo dây văng và những đồi quế Trà My ngát hương.',
+    },
+  },
+  {
+    id: 'commune-tam-my-tay',
+    name: '🌊 Xã Tam Mỹ Tây',
+    districtId: 'nui-thanh',
+    position: [-10, 40, 790],
+    target: [15, 8, 825],
+    info: {
+      badge: 'DANH THẮNG SINH THÁI',
+      title: 'Xã Tam Mỹ Tây (Thác Hố Giang Thơm)',
+      subtitle: 'Kiệt tác Thác 11 Tầng giữa đại ngàn Tây Núi Thành',
+      stats: [
+        { label: 'Diện tích', value: '50.6 km²' },
+        { label: 'Đặc trưng', value: 'Thác Hố Giang Thơm 11 tầng, Hồ Hố Khế, Vườn cây ăn quả' },
+      ],
+      description:
+        'Vùng đệm sinh thái giữa miền sơn cước Tây Núi Thành, nổi tiếng với danh thắng Thác Hố Giang Thơm 11 tầng nước đổ bọt trắng xóa, các hồ tắm thiên nhiên trong vắt và những vườn mít, bưởi trĩu quả.',
+    },
+  },
+  {
+    id: 'commune-tam-my-dong',
+    name: '🌾 Xã Tam Mỹ Đông',
+    districtId: 'nui-thanh',
+    position: [105, 145, 705],
+    target: [105, 3, 815],
+    info: {
+      badge: 'ĐỒNG BẰNG NÔNG NGHIỆP',
+      title: 'Xã Tam Mỹ Đông',
+      subtitle: 'Vựa lúa phù sa màu mỡ & Đập dâng thủy lợi',
+      stats: [
+        { label: 'Diện tích', value: '17.3 km²' },
+        { label: 'Đặc trưng', value: 'Cánh đồng lúa nước, Hệ thống mương thủy lợi bê tông' },
+      ],
+      description:
+        'Cánh đồng lúa nước phì nhiêu được bồi đắp bởi các con suối thượng nguồn, hệ thống đập dâng điều tiết nước tưới tiêu và những con đường bê tông nông thôn mới rợp bóng cây xanh.',
+    },
+  },
+  {
+    id: 'commune-tam-anh-nam',
+    name: '🏗️ Xã Tam Anh Nam',
+    districtId: 'nui-thanh',
+    position: [195, 140, 545],
+    target: [195, 2, 665],
+    info: {
+      badge: 'CÔNG NGHIỆP & LOGISTICS',
+      title: 'Xã Tam Anh Nam',
+      subtitle: 'Khu Công Nghiệp Tam Anh 1 & Trục QL1A',
+      stats: [
+        { label: 'Diện tích', value: '21.9 km²' },
+        { label: 'Đặc trưng', value: 'KCN Tam Anh 1, Trạm logistics, Quốc lộ 1A' },
+      ],
+      description:
+        'Cửa ngõ công nghiệp phía Bắc giáp xã Tam Hiệp, quy hoạch KCN Tam Anh 1 hiện đại với các nhà máy sản xuất thiết bị phụ trợ, điện tử, điện mặt trời áp mái và dịch vụ hậu cần logistics vận tải.',
+    },
+  },
+  {
+    id: 'commune-tam-anh-bac',
+    name: '🏢 Xã Tam Anh Bắc',
+    districtId: 'nui-thanh',
+    position: [200, 140, 480],
+    target: [200, 2, 600],
+    info: {
+      badge: 'CÔNG NGHIỆP SINH THÁI',
+      title: 'Xã Tam Anh Bắc',
+      subtitle: 'Khu Công Nghiệp Tam Anh 2 & Nông nghiệp sạch',
+      stats: [
+        { label: 'Diện tích', value: '21.0 km²' },
+        { label: 'Đặc trưng', value: 'KCN Tam Anh 2, Cánh đồng mẫu lớn, Vành đai xanh' },
+      ],
+      description:
+        'Khu công nghiệp sinh thái Tam Anh 2 kết hợp hài hòa giữa phát triển công nghiệp đa ngành thân thiện môi trường và các cánh đồng lúa chuyên canh năng suất cao ven trục đường tránh.',
+    },
+  },
+  {
+    id: 'commune-tam-son',
+    name: '💧 Xã Tam Sơn',
+    districtId: 'nui-thanh',
+    position: [-80, 140, 590],
+    target: [-80, 4, 710],
+    info: {
+      badge: 'LÒNG HỒ THỦY LỢI',
+      title: 'Xã Tam Sơn',
+      subtitle: 'Hồ thủy lợi mênh mông, Đập tràn & Ốc đảo xanh',
+      stats: [
+        { label: 'Diện tích', value: '54.2 km²' },
+        { label: 'Đặc trưng', value: 'Lòng hồ chứa nước ngọt, Đập tràn xả lũ, Đảo nổi sinh thái' },
+      ],
+      description:
+        'Vùng hồ thủy lợi rộng lớn nhất huyện dự trữ nguồn nước ngọt quý giá cho đời sống và công nghiệp Chu Lai, cảnh quan lòng hồ thơ mộng với những hòn đảo nhỏ và cánh rừng bán ngập xanh tươi.',
+    },
+  },
+  {
+    id: 'commune-tam-thanh',
+    name: '🌲 Xã Tam Thạnh',
+    districtId: 'nui-thanh',
+    position: [65, 165, 510],
+    target: [65, 4, 645],
+    info: {
+      badge: 'RỪNG NGUYÊN LIỆU & HỒ',
+      title: 'Xã Tam Thạnh',
+      subtitle: 'Hồ chứa nước Thái Xuân & Rừng keo bạt ngàn',
+      stats: [
+        { label: 'Diện tích', value: '53.9 km²' },
+        { label: 'Đặc trưng', value: 'Hồ Thái Xuân, Rừng keo lá tràm nguyên liệu giấy' },
+      ],
+      description:
+        'Vùng gò đồi bát úp trập trùng với hàng nghìn hecta keo lá tràm nguyên liệu giấy, sở hữu hồ nước ngọt Thái Xuân trong lành cấp nước sinh hoạt và sản xuất nông nghiệp.',
+    },
+  },
+  {
+    id: 'commune-tam-tien',
+    name: '🌅 Xã Tam Tiến',
+    districtId: 'nui-thanh',
+    position: [350, 155, 435],
+    target: [350, 2, 560],
+    info: {
+      badge: 'DU LỊCH BIỂN & CHỢ CÁ',
+      title: 'Xã Tam Tiến',
+      subtitle: 'Chợ cá bãi biển rạng đông & Rặng phi lao chắn gió',
+      stats: [
+        { label: 'Diện tích', value: '20.6 km²' },
+        { label: 'Đặc trưng', value: 'Chợ cá bình minh Tam Tiến, Bờ biển cát trắng, Thuyền thúng' },
+      ],
+      description:
+        'Nổi tiếng khắp cả nước với chợ cá rạng đông trên bờ cát trắng Tam Tiến họp từ lúc mặt trời vừa ló rạng, bờ biển nguyên sơ thơ mộng với rừng phi lao chắn gió và đường ven biển Võ Chí Công.',
+    },
+  },
+  {
+    id: 'commune-tam-hoa',
+    name: '🌉 Xã Tam Hòa',
+    districtId: 'nui-thanh',
+    position: [330, 150, 530],
+    target: [330, 2, 655],
+    info: {
+      badge: 'SÔNG NƯỚC LỢ & NUÔI THỦY SẢN',
+      title: 'Xã Tam Hòa',
+      subtitle: 'Cầu Tam Hòa bắc qua Trường Giang & Lồng bè',
+      stats: [
+        { label: 'Diện tích', value: '22.6 km²' },
+        { label: 'Đặc trưng', value: 'Cầu Tam Hòa vượt sông, Nuôi cá lồng bè, Đầm nuôi tôm' },
+      ],
+      description:
+        'Xã ven sông Trường Giang sở hữu cầu bê tông Tam Hòa kiên cố nối đôi bờ, trung tâm nuôi trồng thủy sản nước lợ với các dãy bè cá bớp, cá chẽm và hệ thống đầm tôm sú sinh thái.',
+    },
+  },
+  {
+    id: 'commune-tam-giang',
+    name: '🌴 Xã Tam Giang',
+    districtId: 'nui-thanh',
+    position: [275, 130, 700],
+    target: [275, 2, 805],
+    info: {
+      badge: 'CỬA SÔNG & RỪNG DỪA',
+      title: 'Xã Tam Giang',
+      subtitle: 'Ngã ba sông An Tân & Rừng dừa nước ngập mặn',
+      stats: [
+        { label: 'Diện tích', value: '11.5 km²' },
+        { label: 'Đặc trưng', value: 'Rừng dừa nước, Bến ghe truyền thống, Vịnh An Hòa' },
+      ],
+      description:
+        'Tọa lạc tại ngã ba sông nơi dòng An Tân hợp lưu đổ vào Vịnh An Hòa, nổi tiếng với những vạt rừng dừa nước bạt ngàn như miền Tây sông nước và các bến đậu ghe bầu của ngư dân.',
+    },
+  },
+  {
+    id: 'commune-tam-xuan-1',
+    name: '🍜 Xã Tam Xuân 1',
+    districtId: 'nui-thanh',
+    position: [195, 145, 415],
+    target: [195, 2, 535],
+    info: {
+      badge: 'CỬA NGÕ BẮC NÚI THÀNH',
+      title: 'Xã Tam Xuân 1',
+      subtitle: 'Cầu Bà Bầu & Làng nghề truyền thống bún sắn',
+      stats: [
+        { label: 'Diện tích', value: '13.9 km²' },
+        { label: 'Đặc trưng', value: 'Cầu Bà Bầu trên QL1A, Làng nghề bún sắn Phước Ninh' },
+      ],
+      description:
+        'Cửa ngõ tiếp giáp trực tiếp với thành phố Tam Kỳ qua Cầu Bà Bầu trên Quốc lộ 1A, nổi tiếng với đặc sản bún sắn dây truyền thống thơm ngon và làng quê trù phú ven sông.',
+    },
+  },
+  {
+    id: 'commune-tam-xuan-2',
+    name: '🥬 Xã Tam Xuân 2',
+    districtId: 'nui-thanh',
+    position: [90, 150, 410],
+    target: [90, 2, 535],
+    info: {
+      badge: 'NÔNG NGHIỆP CÔNG NGHỆ CAO',
+      title: 'Xã Tam Xuân 2',
+      subtitle: 'Khu nhà kính nông nghiệp & Chế biến lâm sản',
+      stats: [
+        { label: 'Diện tích', value: '26.8 km²' },
+        { label: 'Đặc trưng', value: 'Nhà kính rau củ sạch, Vườn ươm cây lâm nghiệp giống tốt' },
+      ],
+      description:
+        'Vùng bán sơn địa Tây Bắc Núi Thành, tiên phong áp dụng mô hình nhà màng công nghệ cao trồng dưa lưới, dưa leo, rau thủy canh và các cơ sở chế biến gỗ rừng trồng xuất khẩu.',
+    },
+  },
+];
+
+
+export const ALL_VIEWPOINTS: ViewpointItem[] = [...VIEWPOINTS, ...NUI_THANH_COMMUNES];
+
 /**
  * Sidebar Navigation Menu mirroring the vintage cartographic design of duancuulong.com
  * Features:
  * - Brand Card Header ("Dự án Đà Nẵng - Quảng Nam / Bản đồ 3D...")
  * - Segmented Mode Toggle ("Học tập" / "Khám phá 3D")
  * - District filter pills
- * - 2-Column Grid of 24 quick viewpoints
+ * - Dedicated 17-Commune Selector for Huyện Núi Thành
+ * - 2-Column Grid of quick viewpoints
  */
 export class SidebarMenu {
   public element: HTMLElement;
   private cameraManager: CameraManager;
   private onSelectInfo: (info: InfoDisplayData) => void;
   private onModeChange?: (mode: 'study' | 'explore') => void;
+  private onSelectViewpoint?: (item: ViewpointItem) => void;
 
   private currentMode: 'study' | 'explore' = 'study';
-  private currentDistrictFilter: string = 'all';
-  private currentActiveId: string = 'tam-hiep';
+  private currentDistrictFilter: string = 'nui-thanh';
+  private currentActiveId: string = 'nui-thanh';
 
   constructor(props: SidebarMenuProps) {
     this.cameraManager = props.cameraManager;
     this.onSelectInfo = props.onSelectInfo;
     this.onModeChange = props.onModeChange;
+    this.onSelectViewpoint = props.onSelectViewpoint;
 
     this.element = document.createElement('aside');
     this.element.className = 'dcl-sidebar';
@@ -416,28 +867,81 @@ export class SidebarMenu {
   }
 
   public render(): void {
-    // Filter viewpoints based on selected district
-    const filtered =
-      this.currentDistrictFilter === 'all'
-        ? VIEWPOINTS
-        : VIEWPOINTS.filter(
-            (v) => v.districtId === this.currentDistrictFilter || v.districtId === 'all'
-          );
+    let contentHtml = '';
 
-    const gridHtml = filtered
-      .map(
-        (vp) => `
-        <button class="dcl-view-btn ${vp.id === this.currentActiveId ? 'active' : ''}" data-id="${vp.id}">
-          <span>${vp.name}</span>
+    if (this.currentDistrictFilter === 'nui-thanh') {
+      // 1. Grid of all 17 communes in Nui Thanh
+      const communeButtonsHtml = NUI_THANH_COMMUNES.map(
+        (c) => `
+        <button class="dcl-view-btn dcl-commune-btn ${c.id === this.currentActiveId ? 'active' : ''}" data-id="${c.id}" title="${c.info.title}">
+          <span>${c.name}</span>
         </button>
       `
-      )
-      .join('');
+      ).join('');
+
+      // 2. Specific landmark highlights within Nui Thanh
+      const nuiThanhLandmarks = VIEWPOINTS.filter((v) => v.districtId === 'nui-thanh');
+      const landmarkButtonsHtml = nuiThanhLandmarks
+        .map(
+          (vp) => `
+          <button class="dcl-view-btn ${vp.id === this.currentActiveId ? 'active' : ''}" data-id="${vp.id}" title="${vp.info.title}">
+            <span>${vp.name}</span>
+          </button>
+        `
+        )
+        .join('');
+
+      contentHtml = `
+        <!-- Section: 17 Communes of Nui Thanh -->
+        <div class="dcl-section dcl-communes-section">
+          <div class="dcl-section-label">XÃ & THỊ TRẤN (17 ĐƠN VỊ)</div>
+          <div class="dcl-grid-container dcl-commune-grid">
+            ${communeButtonsHtml}
+          </div>
+        </div>
+
+        <!-- Section: Key Landmarks in Nui Thanh -->
+        <div class="dcl-section dcl-viewpoints-section">
+          <div class="dcl-section-label">ĐỊA ĐIỂM TIÊU BIỂU</div>
+          <div class="dcl-grid-container">
+            ${landmarkButtonsHtml}
+          </div>
+        </div>
+      `;
+    } else {
+      // Filter viewpoints for other districts or "all"
+      const filtered =
+        this.currentDistrictFilter === 'all'
+          ? VIEWPOINTS
+          : VIEWPOINTS.filter(
+              (v) => v.districtId === this.currentDistrictFilter || v.districtId === 'all'
+            );
+
+      const gridHtml = filtered
+        .map(
+          (vp) => `
+          <button class="dcl-view-btn ${vp.id === this.currentActiveId ? 'active' : ''}" data-id="${vp.id}" title="${vp.info.title}">
+            <span>${vp.name}</span>
+          </button>
+        `
+        )
+        .join('');
+
+      contentHtml = `
+        <!-- 2-Column Grid Viewpoints -->
+        <div class="dcl-section dcl-viewpoints-section">
+          <div class="dcl-section-label">GÓC NHÌN TIÊU BIỂU</div>
+          <div class="dcl-grid-container">
+            ${gridHtml}
+          </div>
+        </div>
+      `;
+    }
 
     this.element.innerHTML = `
       <!-- Brand Box (duancuulong.com style) -->
       <div class="dcl-brand-card">
-        <button class="dcl-menu-burger" id="dcl-menu-burger" title="Mở rộng menu">
+        <button class="dcl-menu-burger" id="dcl-menu-burger" title="Menu bản đồ">
           <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
             <line x1="3" y1="12" x2="21" y2="12"></line>
             <line x1="3" y1="6" x2="21" y2="6"></line>
@@ -445,50 +949,44 @@ export class SidebarMenu {
           </svg>
         </button>
         <div class="dcl-brand-titles">
-          <h1 class="dcl-title">Bản Đồ 3D Đà Nẵng - Núi Thành</h1>
-          <div class="dcl-subtitle">Khu Kinh Tế Mở Chu Lai - Xã Tam Hiệp (2026)</div>
+          <h1 class="dcl-title">Bản Đồ 3D Núi Thành</h1>
+          <div class="dcl-subtitle">Mô Phỏng 17 Xã/Thị Trấn - Khu Kinh Tế Chu Lai</div>
         </div>
       </div>
 
       <!-- Mode Selector (CHẾ ĐỘ) -->
       <div class="dcl-section dcl-mode-section">
-        <div class="dcl-section-label">CHẾ ĐỘ</div>
+        <div class="dcl-section-label">CHẾ ĐỘ XEM</div>
         <div class="dcl-mode-toggle">
           <button class="dcl-mode-btn ${this.currentMode === 'study' ? 'active' : ''}" data-mode="study">
             Học tập
           </button>
           <button class="dcl-mode-btn ${this.currentMode === 'explore' ? 'active' : ''}" data-mode="explore">
-            Khám phá
+            Khám phá 3D
           </button>
         </div>
         <div class="dcl-mode-desc">
           ${
             this.currentMode === 'study'
-              ? 'Bản đồ địa lý thuần: hiển thị địa hình 3D, ruộng lúa, công trình và ranh giới.'
-              : 'Chế độ tương tác tự do: bay tự do, khám phá chi tiết nhà cửa và phân khu.'
+              ? 'Mô hình địa hình số DEM: 17 xã/thị trấn, ruộng đồng, sông ngòi & công trình.'
+              : 'Chế độ tương tác tự do: bay lượn ngắm cảnh, tham quan chi tiết nhà xưởng và thắng cảnh.'
           }
         </div>
       </div>
 
       <!-- District Filter Chips -->
       <div class="dcl-section dcl-filter-section">
-        <div class="dcl-section-label">LỌC KHU VỰC</div>
+        <div class="dcl-section-label">LỌC HUYỆN / QUẬN</div>
         <div class="dcl-filter-chips">
-          <button class="dcl-filter-chip ${this.currentDistrictFilter === 'all' ? 'active' : ''}" data-dist="all">Tất cả</button>
-          <button class="dcl-filter-chip ${this.currentDistrictFilter === 'nui-thanh' ? 'active' : ''}" data-dist="nui-thanh">Núi Thành</button>
+          <button class="dcl-filter-chip ${this.currentDistrictFilter === 'nui-thanh' ? 'active' : ''}" data-dist="nui-thanh">Núi Thành (17 Xã)</button>
+          <button class="dcl-filter-chip ${this.currentDistrictFilter === 'all' ? 'active' : ''}" data-dist="all">Toàn tỉnh</button>
           <button class="dcl-filter-chip ${this.currentDistrictFilter === 'hai-chau' ? 'active' : ''}" data-dist="hai-chau">Hải Châu</button>
           <button class="dcl-filter-chip ${this.currentDistrictFilter === 'son-tra' ? 'active' : ''}" data-dist="son-tra">Sơn Trà</button>
           <button class="dcl-filter-chip ${this.currentDistrictFilter === 'hoa-vang' ? 'active' : ''}" data-dist="hoa-vang">Hòa Vang</button>
         </div>
       </div>
 
-      <!-- 2-Column Grid Viewpoints (GÓC NHÌN) -->
-      <div class="dcl-section dcl-viewpoints-section">
-        <div class="dcl-section-label">GÓC NHÌN</div>
-        <div class="dcl-grid-container">
-          ${gridHtml}
-        </div>
-      </div>
+      ${contentHtml}
     `;
 
     this.bindEvents();
@@ -510,17 +1008,17 @@ export class SidebarMenu {
     const chips = this.element.querySelectorAll<HTMLButtonElement>('.dcl-filter-chip');
     chips.forEach((chip) => {
       chip.addEventListener('click', () => {
-        this.currentDistrictFilter = chip.dataset.dist || 'all';
+        this.currentDistrictFilter = chip.dataset.dist || 'nui-thanh';
         this.render();
       });
     });
 
-    // 3. 2-Column Grid Viewpoint Buttons
+    // 3. Viewpoint & Commune Buttons
     const viewBtns = this.element.querySelectorAll<HTMLButtonElement>('.dcl-view-btn');
     viewBtns.forEach((btn) => {
       btn.addEventListener('click', () => {
         const id = btn.dataset.id;
-        const item = VIEWPOINTS.find((v) => v.id === id);
+        const item = ALL_VIEWPOINTS.find((v) => v.id === id);
         if (item) {
           this.selectViewpoint(item);
         }
@@ -535,5 +1033,7 @@ export class SidebarMenu {
 
     this.cameraManager.flyTo(item.position, item.target);
     this.onSelectInfo(item.info);
+    this.onSelectViewpoint?.(item);
   }
 }
+

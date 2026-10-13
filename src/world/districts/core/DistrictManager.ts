@@ -31,6 +31,10 @@ export class DistrictManager {
     return this.districts.get(id);
   }
 
+  public get nuiThanhDistrict(): NuiThanhDistrict {
+    return this.districts.get('nui-thanh') as NuiThanhDistrict;
+  }
+
   public getAllDistricts(): BaseDistrict[] {
     return Array.from(this.districts.values());
   }

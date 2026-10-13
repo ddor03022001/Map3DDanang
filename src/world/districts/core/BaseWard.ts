@@ -44,7 +44,9 @@ export abstract class BaseWard {
   }
 
   public abstract initialize(): void;
-  public abstract update(delta: number, elapsed: number, nightGlowIntensity: number): void;
+  public update(_delta: number, _elapsed: number, _nightGlowIntensity: number): void {
+    // Default implementation: overridden by wards with animated components
+  }
 
   public getCameraPreset(): {
     position: [number, number, number];

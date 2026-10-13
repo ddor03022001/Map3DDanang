@@ -76,8 +76,8 @@ export const CAMERA_CONFIG = {
   FOV: 45,
   NEAR: 0.5,
   FAR: 3000,
-  DEFAULT_POSITION: [48, 32, 58] as [number, number, number],
-  DEFAULT_TARGET: [0, 4, 0] as [number, number, number],
+  DEFAULT_POSITION: [220, 260, 560] as [number, number, number],
+  DEFAULT_TARGET: [230, 4, 760] as [number, number, number],
   MIN_DISTANCE: 10,
   MAX_DISTANCE: 1800,
   MAX_POLAR_ANGLE: Math.PI / 2 - 0.04, // Avoid clipping below ground

@@ -1114,6 +1114,23 @@ body {
   box-shadow: inset 0 0 0 1px var(--dcl-primary-burgundy);
 }
 
+.dcl-commune-btn {
+  border-left: 2.5px solid var(--dcl-border-gold);
+  background: rgba(255, 252, 246, 0.9);
+  font-size: 0.70rem;
+  letter-spacing: 0.1px;
+}
+
+.dcl-commune-btn:hover {
+  border-left-color: var(--dcl-primary-burgundy);
+}
+
+.dcl-commune-btn.active {
+  border-left-color: var(--dcl-primary-burgundy);
+  border-left-width: 3.5px;
+}
+
+
 /* Top-Right Circle Actions */
 .dcl-topbar-actions {
   position: absolute;

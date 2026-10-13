@@ -33,7 +33,7 @@ export class LandmarkMenu {
 
   private activeDistrictId = 'nui-thanh';
   private activeWardId = 'tam-hiep-commune';
-  private activeSubLandmarkId: string | null = 'tam-hiep-satellite';
+  private activeSubLandmarkId: string | null = 'tam-hiep-overview';
 
   constructor(props: LandmarkMenuProps) {
     this.districtManager = props.districtManager;
@@ -76,7 +76,7 @@ export class LandmarkMenu {
         const isActive = w.metadata.id === this.activeWardId;
         const typeLabel =
           w.metadata.id === 'tam-hiep-commune'
-            ? 'VỆ TINH 3D'
+            ? '3D CHI TIẾT'
             : w.metadata.type === 'ward'
             ? 'PHƯỜNG'
             : w.metadata.type === 'town'

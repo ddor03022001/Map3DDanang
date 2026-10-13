@@ -1,9 +1,16 @@
 import * as THREE from 'three';
 
 /**
- * THACO Chu Lai Industrial & Automotive Complex (Khu phức hợp ô tô & cơ khí THACO Chu Lai)
- * Features THACO Mazda, KIA, Truck & Bus plants, executive headquarters,
- * vehicle storage yards with instanced cars, test track, and grand entrance arch.
+ * THACO Chu Lai Industrial & Automotive Mega-Complex
+ * (Khu Phức Hợp Ô Tô & Cơ Khí THACO Chu Lai - Tâm Điểm Xã Tam Hiệp)
+ * Flagship manufacturing facilities:
+ * - THACO Mazda (automated modern plant with rooftop solar panel arrays)
+ * - THACO KIA & THACO Bus/Truck Plants with branded facade logos
+ * - THACO Industries Precision Mechanical Engineering Center
+ * - Executive Headquarters (5-story curved curtain-glass building)
+ * - Vehicle Holding Yards with over 300 instanced finished cars
+ * - High-speed banked Proving Ground automotive test track
+ * - Grand THACO corporate entrance gateway
  */
 export class ThacoComplex {
   public group = new THREE.Group();
@@ -17,12 +24,12 @@ export class ThacoComplex {
     this.buildVehicleStorageYard();
     this.buildTestTrack();
 
-    // Positioned East of the Chu Lai Overpass on Highway 1A
+    // Positioned East of Highway 1A and Chu Lai Overpass in Tam Hiep
     this.group.position.set(290, 0, 720);
   }
 
   /**
-   * 1. Grand Entrance Arch of THACO Chu Lai Complex (Cổng chào THACO Chu Lai)
+   * 1. Grand Entrance Arch of THACO Chu Lai Complex (Cổng Chào THACO Chu Lai)
    */
   private buildEntranceGate(): void {
     const archGroup = new THREE.Group();
@@ -54,18 +61,29 @@ export class ThacoComplex {
     archGroup.add(lintel);
 
     // THACO logo block in the center
-    const logoBlockGeo = new THREE.BoxGeometry(7.5, 1.0, 2.4);
-    const logoBlock = new THREE.Mesh(logoBlockGeo, thacoBlueMat);
-    logoBlock.position.set(0, 10.4, 0);
+    const logoCanvas = document.createElement('canvas');
+    logoCanvas.width = 256;
+    logoCanvas.height = 64;
+    const ctx = logoCanvas.getContext('2d')!;
+    ctx.fillStyle = '#004d9c';
+    ctx.fillRect(0, 0, 256, 64);
+    ctx.fillStyle = '#ffffff';
+    ctx.font = 'bold 34px sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText('THACO CHU LAI', 128, 44);
+
+    const logoTex = new THREE.CanvasTexture(logoCanvas);
+    const logoBlockGeo = new THREE.PlaneGeometry(8.5, 2.0);
+    const logoBlock = new THREE.Mesh(logoBlockGeo, new THREE.MeshBasicMaterial({ map: logoTex }));
+    logoBlock.position.set(0, 10.4, 1.15);
     archGroup.add(logoBlock);
 
-    // Position arch at front entrance facing Highway 1A
     archGroup.position.set(-35, 0, 0);
     this.group.add(archGroup);
   }
 
   /**
-   * 2. Massive Industrial Assembly Plants (Nhà máy THACO Mazda, KIA, Bus & Truck)
+   * 2. Massive Industrial Assembly Plants (Nhà máy THACO Mazda, KIA, Bus, Truck)
    */
   private buildAssemblyPlants(): void {
     const wallMat = new THREE.MeshStandardMaterial({
@@ -73,21 +91,22 @@ export class ThacoComplex {
       roughness: 0.7,
       metalness: 0.2,
     });
-    const roofMat = new THREE.MeshStandardMaterial({
-      color: 0x2e4a62, // Industrial metal corrugated roof blue
-      roughness: 0.6,
-      metalness: 0.3,
+    const solarMat = new THREE.MeshStandardMaterial({
+      color: 0x122a45, // Deep navy photovoltaic solar cells
+      roughness: 0.2,
+      metalness: 0.85,
+    });
+    const ventMat = new THREE.MeshStandardMaterial({
+      color: 0xc4cdd5,
+      metalness: 0.8,
+      roughness: 0.3,
     });
 
     const plants = [
-      // 1. THACO Mazda Plant (Grand flagship plant: length 75, width 42, height 8)
-      { name: 'THACO Mazda', x: 25, z: -35, length: 75, width: 42, height: 8.5, roofColor: 0x25445e },
-      // 2. THACO KIA Assembly Plant (Length 65, width 38, height 7.5)
-      { name: 'THACO KIA', x: 25, z: 35, length: 65, width: 38, height: 7.8, roofColor: 0x364858 },
-      // 3. THACO Truck & Bus Plant (Length 80, width 45, height 9)
-      { name: 'THACO Truck & Bus', x: 105, z: -35, length: 80, width: 45, height: 9.0, roofColor: 0x223d54 },
-      // 4. Mechanical Components & Logistics Center
-      { name: 'THACO Industries', x: 105, z: 35, length: 70, width: 40, height: 7.2, roofColor: 0x2e4252 },
+      { name: 'THACO MAZDA', x: 25, z: -35, length: 78, width: 44, height: 8.5, roofColor: 0x25445e },
+      { name: 'THACO KIA', x: 25, z: 35, length: 68, width: 40, height: 7.8, roofColor: 0x364858 },
+      { name: 'THACO BUS & TRUCK', x: 110, z: -35, length: 82, width: 46, height: 9.0, roofColor: 0x223d54 },
+      { name: 'THACO INDUSTRIES', x: 110, z: 35, length: 72, width: 42, height: 7.5, roofColor: 0x2e4252 },
     ];
 
     plants.forEach((plant) => {
@@ -101,9 +120,12 @@ export class ThacoComplex {
       wall.receiveShadow = true;
       plantGroup.add(wall);
 
-      // Curved / gabled industrial roof
-      const plantRoofMat = roofMat.clone();
-      plantRoofMat.color.setHex(plant.roofColor);
+      // Curved industrial roof
+      const plantRoofMat = new THREE.MeshStandardMaterial({
+        color: plant.roofColor,
+        roughness: 0.6,
+        metalness: 0.3,
+      });
 
       const roofGeo = new THREE.CylinderGeometry(
         plant.width * 0.55,
@@ -121,12 +143,58 @@ export class ThacoComplex {
       roof.castShadow = true;
       plantGroup.add(roof);
 
-      // Blue corporate perimeter striping
-      const stripeGeo = new THREE.BoxGeometry(plant.length + 0.2, 0.8, plant.width + 0.2);
-      const stripeMat = new THREE.MeshStandardMaterial({ color: 0x004d9c, metalness: 0.6 });
-      const stripe = new THREE.Mesh(stripeGeo, stripeMat);
-      stripe.position.y = plant.height * 0.75;
-      plantGroup.add(stripe);
+      // Rooftop Photovoltaic Solar Arrays (Pin năng lượng mặt trời trên mái xưởng)
+      const solarCols = 6;
+      for (let s = 0; s < solarCols; s++) {
+        const sx = -plant.length * 0.38 + (s * plant.length * 0.76) / (solarCols - 1);
+        const solarPanel = new THREE.Mesh(
+          new THREE.PlaneGeometry(plant.length * 0.12, plant.width * 0.45),
+          solarMat
+        );
+        solarPanel.rotateX(-Math.PI / 2);
+        solarPanel.position.set(sx, plant.height + plant.width * 0.52, 0);
+        plantGroup.add(solarPanel);
+      }
+
+      // Industrial Roof Turbovents (Quạt thông gió công nghiệp)
+      for (let v = 0; v < 4; v++) {
+        const vx = -plant.length * 0.3 + (v * plant.length * 0.6) / 3;
+        const vent = new THREE.Mesh(new THREE.CylinderGeometry(0.8, 1.0, 1.2, 8), ventMat);
+        vent.position.set(vx, plant.height + plant.width * 0.54, 0);
+        plantGroup.add(vent);
+      }
+
+      // Facade Signage Banner (Biển tên nhà máy THACO)
+      const bannerCanvas = document.createElement('canvas');
+      bannerCanvas.width = 512;
+      bannerCanvas.height = 96;
+      const bCtx = bannerCanvas.getContext('2d')!;
+      bCtx.fillStyle = '#004d9c';
+      bCtx.fillRect(0, 0, 512, 96);
+      bCtx.strokeStyle = '#ffffff';
+      bCtx.lineWidth = 4;
+      bCtx.strokeRect(6, 6, 500, 84);
+      bCtx.fillStyle = '#ffffff';
+      bCtx.font = 'bold 36px sans-serif';
+      bCtx.textAlign = 'center';
+      bCtx.fillText(plant.name, 256, 58);
+
+      const bannerTex = new THREE.CanvasTexture(bannerCanvas);
+      const bannerMesh = new THREE.Mesh(
+        new THREE.PlaneGeometry(16, 3.2),
+        new THREE.MeshBasicMaterial({ map: bannerTex })
+      );
+      bannerMesh.position.set(0, plant.height * 0.8, plant.width / 2 + 0.15);
+      plantGroup.add(bannerMesh);
+
+      // Loading Dock Bay Doors on side wall
+      const dockMat = new THREE.MeshStandardMaterial({ color: 0x3d444a, roughness: 0.5 });
+      for (let d = -2; d <= 2; d++) {
+        const dockDoor = new THREE.Mesh(new THREE.PlaneGeometry(4.0, 4.0), dockMat);
+        dockDoor.rotateY(Math.PI / 2);
+        dockDoor.position.set(plant.length / 2 + 0.1, 2.0, d * 7.0);
+        plantGroup.add(dockDoor);
+      }
 
       plantGroup.position.set(plant.x, 0, plant.z);
       this.group.add(plantGroup);
@@ -134,7 +202,7 @@ export class ThacoComplex {
   }
 
   /**
-   * 3. THACO Executive Headquarters Building (Tòa nhà Văn phòng Điều hành)
+   * 3. THACO Executive Headquarters Building (Tòa Nhà Văn Phòng Điều Hành)
    */
   private buildExecutiveHeadquarters(): void {
     const glassMat = new THREE.MeshPhysicalMaterial({
@@ -172,12 +240,12 @@ export class ThacoComplex {
   }
 
   /**
-   * 4. Vehicle Storage Yard with hundreds of finished automobiles (Bãi đỗ xe thành phẩm)
+   * 4. Vehicle Storage Yard with hundreds of finished automobiles (Bãi Đỗ Xe Thành Phẩm)
    * Rendered in 1 draw call using InstancedMesh for 60 FPS performance!
    */
   private buildVehicleStorageYard(): void {
-    const lotLength = 80;
-    const lotWidth = 40;
+    const lotLength = 84;
+    const lotWidth = 42;
 
     // Asphalt lot ground
     const lotGeo = new THREE.PlaneGeometry(lotLength, lotWidth);
@@ -218,15 +286,13 @@ export class ThacoComplex {
 
     for (let r = 0; r < rows; r++) {
       for (let c = 0; c < cols; c++) {
-        // Position each car neatly inside the parking grid
-        const cx = 65 - lotLength / 2 + 3.0 + c * 2.7;
-        const cz = -85 - lotWidth / 2 + 2.5 + r * 3.1;
+        const cx = 65 - lotLength / 2 + 3.0 + c * 2.8;
+        const cz = -85 - lotWidth / 2 + 2.5 + r * 3.2;
 
         dummy.position.set(cx, 0.38, cz);
         dummy.updateMatrix();
 
         this.vehicleMesh.setMatrixAt(carIndex, dummy.matrix);
-        // Realistic distribution with Mazda red and white dominance
         const color = carColors[(c + r * 3) % carColors.length];
         this.vehicleMesh.setColorAt(carIndex, color);
 
@@ -240,7 +306,7 @@ export class ThacoComplex {
   }
 
   /**
-   * 5. Automotive Testing Track (Đường chạy thử nghiệm xe ô tô chuyên dụng)
+   * 5. Automotive Testing Track (Đường Chạy Thử Xe Chuyên Dụng Proving Ground)
    */
   private buildTestTrack(): void {
     const trackMat = new THREE.MeshStandardMaterial({
@@ -248,7 +314,6 @@ export class ThacoComplex {
       roughness: 0.75,
     });
 
-    // Oval test track surrounding the southern sector
     const points: THREE.Vector3[] = [];
     const radiusX = 65;
     const radiusZ = 35;
@@ -262,7 +327,6 @@ export class ThacoComplex {
 
     const curve = new THREE.CatmullRomCurve3(points, true);
     const trackGeo = new THREE.TubeGeometry(curve, 72, 2.2, 4, true);
-    // Flatten tube into a wide asphalt ribbon
     trackGeo.scale(1, 0.08, 1);
 
     const trackMesh = new THREE.Mesh(trackGeo, trackMat);

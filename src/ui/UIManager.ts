@@ -53,6 +53,11 @@ export class UIManager {
           if (toanTinhVP) this.sidebarMenu.selectViewpoint(toanTinhVP);
         }
       },
+      onSelectViewpoint: (item) => {
+        if (item.id.startsWith('commune-')) {
+          this.world.districtManager.nuiThanhDistrict.territoryManager.highlightCommune(item.id);
+        }
+      },
     });
 
     // 3. Top-Right Toolbar (Search, Share, Compass, Help, Language)
@@ -104,8 +109,8 @@ export class UIManager {
     this.container.appendChild(this.minimap.element);
     document.body.appendChild(this.container);
 
-    // Initial camera position: focus on Tam Hiep & Chu Lai
-    const initialVP = VIEWPOINTS.find((v) => v.id === 'tam-hiep');
+    // Initial camera position: focus on Huyện Núi Thành comprehensive district overview
+    const initialVP = VIEWPOINTS.find((v) => v.id === 'nui-thanh') || VIEWPOINTS.find((v) => v.id === 'tam-hiep');
     if (initialVP) {
       this.sidebarMenu.selectViewpoint(initialVP);
     }
