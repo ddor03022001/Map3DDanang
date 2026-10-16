@@ -1,5 +1,6 @@
 import * as THREE from 'three';
 import { BaseWard } from '../../core/BaseWard';
+import { getNuiThanhElevation } from '@/world/terrain/ReliefTerrain';
 
 /**
  * Xã Tam Thạnh (Huyện Núi Thành) - "Hồ Thủy Lợi Thái Xuân & Rừng Keo Lâm Nghiệp"
@@ -21,22 +22,22 @@ export class TamThanhCommune extends BaseWard {
         description:
           'Địa bàn Hồ chứa nước Thái Xuân cung cấp nguồn nước ngọt huyết mạch cho vùng công nghiệp Chu Lai, cùng hàng nghìn hecta rừng keo tràm bạt ngàn trên vùng đất đỏ bazan.',
         cameraPreset: {
-          position: [35, 55, 630],
-          target: [65, 4, 665],
+          position: [35, 75, 630],
+          target: [65, 12, 665],
         },
         subLandmarks: [
           {
             id: 'dap-thai-xuan',
             name: '🌊 Đập Thủy Lợi & Hồ Thái Xuân',
             category: 'nature',
-            cameraPreset: { position: [45, 28, 645], target: [70, 4, 665] },
+            cameraPreset: { position: [45, 32, 735], target: [70, 4, 665] },
             description: 'Công trình đập ngăn nước, đập tràn bê tông và tháp lấy nước hồ thủy lợi Thái Xuân.',
           },
           {
             id: 'choi-canh-rung-tam-thanh',
             name: '🌲 Chòi Canh Lửa Rừng Đồi Keo',
             category: 'cultural',
-            cameraPreset: { position: [30, 32, 675], target: [45, 12, 690] },
+            cameraPreset: { position: [30, 55, 760], target: [45, 26, 690] },
             description: 'Chòi canh phòng cháy chữa cháy rừng trên đỉnh đồi đất đỏ nhìn bao quát toàn bộ vùng đồi Tam Thạnh.',
           },
         ],
@@ -93,7 +94,7 @@ export class TamThanhCommune extends BaseWard {
 
   private buildForestWatchtowerAndHills(): void {
     const hillGroup = new THREE.Group();
-    hillGroup.position.set(45, 0, 690);
+    hillGroup.position.set(45, getNuiThanhElevation(45, 690), 690);
 
     const steelMat = new THREE.MeshStandardMaterial({ color: 0x37474f, roughness: 0.5 });
     const cabinMat = new THREE.MeshStandardMaterial({ color: 0xe65100, roughness: 0.6 }); // Orange visibility cabin
@@ -113,10 +114,9 @@ export class TamThanhCommune extends BaseWard {
     cabin.castShadow = true;
     hillGroup.add(cabin);
 
-    // Pyramid roof
-    const roof = new THREE.Mesh(new THREE.ConeGeometry(3.5, 1.8, 4), steelMat);
-    roof.rotateY(Math.PI / 4);
-    roof.position.set(0, 16.8, 0);
+    // Cabin roof
+    const roof = new THREE.Mesh(new THREE.BoxGeometry(4.8, 1.0, 4.2), steelMat);
+    roof.position.set(0, 16.5, 0);
     hillGroup.add(roof);
 
     this.group.add(hillGroup);

@@ -29,14 +29,14 @@ export class TamMyDongCommune extends BaseWard {
             id: 'dong-lua-tam-my-dong',
             name: '🌾 Đồng Lúa Phù Sa & Kênh Thủy Lợi',
             category: 'nature',
-            cameraPreset: { position: [110, 28, 815], target: [135, 4, 835] },
+            cameraPreset: { position: [110, 28, 905], target: [135, 4, 835] },
             description: 'Những thửa ruộng lúa chia ô bàn cờ màu mỡ được tưới mát bởi kênh thủy lợi dẫn nước từ hồ chứa.',
           },
           {
             id: 'dap-thuy-loi-my-dong',
             name: '🌊 Đập Thủy Lợi Dâng Nước',
             category: 'cultural',
-            cameraPreset: { position: [90, 22, 820], target: [115, 3, 835] },
+            cameraPreset: { position: [90, 22, 905], target: [115, 3, 835] },
             description: 'Công trình đập dâng thủy lợi điều hòa nguồn nước tưới tiêu cho hàng trăm hecta lúa.',
           },
         ],
@@ -137,10 +137,8 @@ export class TamMyDongCommune extends BaseWard {
       h.castShadow = true;
       village.add(h);
 
-      const r = new THREE.Mesh(new THREE.ConeGeometry(6, 2.2, 4), roofMat);
-      r.rotateY(Math.PI / 4);
-      r.position.set(hx, 4.5 + 1.1, i * 8);
-      r.scale.set(1.4, 1, 1.1);
+      const r = new THREE.Mesh(new THREE.BoxGeometry(8.5, 1.2, 6.5), roofMat);
+      r.position.set(hx, 4.5 + 0.6, i * 8);
       r.castShadow = true;
       village.add(r);
     });

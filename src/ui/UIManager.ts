@@ -54,6 +54,7 @@ export class UIManager {
         }
       },
       onSelectViewpoint: (item) => {
+        this.world.setDistrictFocus(item.districtId || 'nui-thanh');
         if (item.id.startsWith('commune-')) {
           this.world.districtManager.nuiThanhDistrict.territoryManager.highlightCommune(item.id);
         }
@@ -122,6 +123,7 @@ export class UIManager {
         this.engine.cameraManager.camera.position.y
       );
       this.minimap.update();
+      this.topRightBar.update();
     });
   }
 

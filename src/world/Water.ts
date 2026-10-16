@@ -9,6 +9,7 @@ export class Water {
 
   private riverMesh: THREE.Mesh;
   private oceanMesh: THREE.Mesh;
+  private daNangWaterGroup: THREE.Group;
   private waterMaterial: THREE.MeshStandardMaterial;
   private normalMap: THREE.CanvasTexture;
 
@@ -26,16 +27,21 @@ export class Water {
       opacity: 0.95,
     });
 
-    // 1. Han River Geometry (S-curved path flowing through Da Nang center)
+    // 1 & 2. Da Nang Core Waterways (Han River & My Khe ocean)
+    this.daNangWaterGroup = new THREE.Group();
     this.riverMesh = this.createHanRiverMesh();
-    this.group.add(this.riverMesh);
-
-    // 2. East Sea / My Khe Beach Ocean Mesh
+    this.daNangWaterGroup.add(this.riverMesh);
     this.oceanMesh = this.createOceanMesh();
-    this.group.add(this.oceanMesh);
+    this.daNangWaterGroup.add(this.oceanMesh);
+    this.daNangWaterGroup.visible = false; // Hidden when focusing on Nui Thanh
+    this.group.add(this.daNangWaterGroup);
 
     // 3. Nui Thanh Waterways: An Hoa Bay, East Sea around Tam Hai, Truong Giang & An Tan Rivers, Reservoir Lakes
     this.buildNuiThanhWaterSystem();
+  }
+
+  public setDaNangWaterVisible(visible: boolean): void {
+    this.daNangWaterGroup.visible = visible;
   }
 
   /**

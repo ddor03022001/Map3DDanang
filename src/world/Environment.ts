@@ -31,22 +31,24 @@ export class Environment {
     );
     this.group.add(this.hemiLight);
 
-    // Primary Sun Light with optimized soft city shadow bounds
+    // Primary Sun Light with warm relief hillshading
     this.sunLight = new THREE.DirectionalLight(initial.sunColor, initial.sunIntensity);
-    this.sunLight.position.set(...initial.sunPosition);
+    this.sunLight.position.set(initial.sunPosition[0] + 100, initial.sunPosition[1], initial.sunPosition[2] + 650);
+    this.sunLight.target.position.set(200, 0, 750);
+    this.group.add(this.sunLight.target);
     this.sunLight.castShadow = true;
     this.sunLight.shadow.mapSize.width = 2048;
     this.sunLight.shadow.mapSize.height = 2048;
     this.sunLight.shadow.camera.near = 10;
-    this.sunLight.shadow.camera.far = 800;
+    this.sunLight.shadow.camera.far = 1400;
 
-    // Shadow frustum covering the central core of Da Nang
-    const shadowDist = 220;
+    // Shadow frustum covering the entire district relief model
+    const shadowDist = 550;
     this.sunLight.shadow.camera.left = -shadowDist;
     this.sunLight.shadow.camera.right = shadowDist;
     this.sunLight.shadow.camera.top = shadowDist;
     this.sunLight.shadow.camera.bottom = -shadowDist;
-    this.sunLight.shadow.bias = -0.0005;
+    this.sunLight.shadow.bias = -0.0004;
     this.group.add(this.sunLight);
 
     // Secondary cool moonlight for night ambiance

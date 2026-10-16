@@ -1,5 +1,6 @@
 import * as THREE from 'three';
 import { BaseWard } from '../../core/BaseWard';
+import { getNuiThanhElevation } from '@/world/terrain/ReliefTerrain';
 
 /**
  * Xã Tam Mỹ Tây (Huyện Núi Thành) - "Tuyệt Tác Thác 11 Tầng Hố Giang Thơm"
@@ -23,22 +24,22 @@ export class TamMyTayCommune extends BaseWard {
         description:
           'Xã sinh thái nổi danh với Thắng cảnh Thác 11 tầng Hố Giang Thơm - kỳ quan thác nước tự nhiên giữa rừng già nguyên sinh và các vùng gò đồi cây trái xum xuê.',
         cameraPreset: {
-          position: [-10, 36, 800],
-          target: [15, 8, 825],
+          position: [-10, 72, 800],
+          target: [15, 28, 825],
         },
         subLandmarks: [
           {
             id: 'ho-giang-thom',
             name: '🌊 Thác 11 Tầng Hố Giang Thơm',
             category: 'nature',
-            cameraPreset: { position: [-15, 24, 815], target: [15, 8, 825] },
+            cameraPreset: { position: [-15, 52, 895], target: [15, 28, 825] },
             description: 'Tuyệt tác thiên nhiên 11 tầng thác nước đổ bọt trắng xóa qua các bậc đá hoa cương nguyên khối.',
           },
           {
             id: 'tam-my-tay-farms',
             name: '🍊 Trang Trại Cây Ăn Trái',
             category: 'nature',
-            cameraPreset: { position: [5, 28, 835], target: [25, 6, 845] },
+            cameraPreset: { position: [5, 48, 915], target: [25, 20, 845] },
             description: 'Vườn cam, bưởi, sầu riêng và trang trại gà đồi của bà con nông dân Tam Mỹ Tây.',
           },
         ],
@@ -60,7 +61,7 @@ export class TamMyTayCommune extends BaseWard {
    */
   private buildHoGiangThomWaterfall(): void {
     const fallGroup = new THREE.Group();
-    fallGroup.position.set(15, 0, 825);
+    fallGroup.position.set(15, getNuiThanhElevation(15, 825), 825);
 
     const rockMat = new THREE.MeshStandardMaterial({ color: 0x47494d, roughness: 0.9 });
     const waterMat = new THREE.MeshStandardMaterial({
@@ -72,24 +73,32 @@ export class TamMyTayCommune extends BaseWard {
     });
     const foamMat = new THREE.MeshBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.75 });
 
-    // 11 granite rock steps (11 tầng thác đá)
-    for (let t = 0; t < 11; t++) {
-      const rockGeo = new THREE.BoxGeometry(16 - t * 0.8, 1.2, 7.5);
-      const rock = new THREE.Mesh(rockGeo, rockMat);
-      rock.position.set(0, (11 - t) * 1.2, -t * 4.2);
-      rock.receiveShadow = true;
-      fallGroup.add(rock);
+    // Natural mountain stream cascade cutting through granite gorge
+    const streamBed = new THREE.Mesh(
+      new THREE.PlaneGeometry(12, 45),
+      waterMat
+    );
+    streamBed.rotateX(-Math.PI / 2);
+    streamBed.position.set(0, 1.2, -10);
+    fallGroup.add(streamBed);
 
-      // Water sheets falling down
-      const sheetGeo = new THREE.PlaneGeometry(10 - t * 0.6, 3.8);
-      sheetGeo.rotateX(-0.55);
-      const sheet = new THREE.Mesh(sheetGeo, waterMat);
-      sheet.position.set(0, (11 - t) * 1.2 - 0.4, -t * 4.2 + 3.2);
+    // Natural granite rock ledges framing the waterfall cascades
+    for (let t = 0; t < 5; t++) {
+      const zPos = -22 + t * 9;
+      const ledge = new THREE.Mesh(new THREE.BoxGeometry(10 - t * 0.5, 0.8, 4.0), rockMat);
+      ledge.position.set(0, (5 - t) * 0.8 + 0.4, zPos);
+      ledge.receiveShadow = true;
+      fallGroup.add(ledge);
+
+      // Water sheets falling down cascade
+      const sheet = new THREE.Mesh(new THREE.PlaneGeometry(8 - t * 0.4, 2.2), waterMat);
+      sheet.rotateX(-0.6);
+      sheet.position.set(0, (5 - t) * 0.8 + 0.1, zPos + 2.2);
       fallGroup.add(sheet);
 
       // Foaming splash at base of each cascade
-      const foam = new THREE.Mesh(new THREE.BoxGeometry(11 - t * 0.6, 0.35, 1.4), foamMat);
-      foam.position.set(0, (11 - t) * 1.2 - 0.9, -t * 4.2 + 4.2);
+      const foam = new THREE.Mesh(new THREE.BoxGeometry(8.5 - t * 0.4, 0.2, 1.0), foamMat);
+      foam.position.set(0, (5 - t) * 0.8 - 0.2, zPos + 3.0);
       this.waterfallFoam.push(foam);
       fallGroup.add(foam);
     }
@@ -120,7 +129,7 @@ export class TamMyTayCommune extends BaseWard {
    */
   private buildFruitOrchardsAndHamlets(): void {
     const farmGroup = new THREE.Group();
-    farmGroup.position.set(30, 0, 845);
+    farmGroup.position.set(30, getNuiThanhElevation(30, 845), 845);
 
     const houseMat = new THREE.MeshStandardMaterial({ color: 0xf5f3ee, roughness: 0.65 });
     const roofMat = new THREE.MeshStandardMaterial({ color: 0xb53528, roughness: 0.4 });
@@ -133,10 +142,8 @@ export class TamMyTayCommune extends BaseWard {
       house.castShadow = true;
       farmGroup.add(house);
 
-      const roof = new THREE.Mesh(new THREE.ConeGeometry(5.0, 2.2, 4), roofMat);
-      roof.rotateY(Math.PI / 4);
-      roof.scale.set(1.4, 1, 1.1);
-      roof.position.set(hx, 4.2 + 1.1, i * 6);
+      const roof = new THREE.Mesh(new THREE.BoxGeometry(7.0, 0.9, 5.4), roofMat);
+      roof.position.set(hx, 4.2 + 0.45, i * 6);
       roof.castShadow = true;
       farmGroup.add(roof);
     });

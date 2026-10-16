@@ -29,21 +29,21 @@ export class TamXuan1Commune extends BaseWard {
             id: 'cong-chao-nui-thanh',
             name: '⛩️ Cổng Chào Huyện Núi Thành',
             category: 'cultural',
-            cameraPreset: { position: [195, 25, 510], target: [215, 6, 530] },
+            cameraPreset: { position: [195, 25, 600], target: [215, 6, 530] },
             description: 'Cổng chào quy mô hiện đại đón chào du khách bước vào vùng đất mở Chu Lai - Núi Thành.',
           },
           {
             id: 'cau-ba-bau',
             name: '🌉 Cầu Bà Bầu (QL1A)',
             category: 'bridge',
-            cameraPreset: { position: [185, 28, 520], target: [215, 3, 540] },
+            cameraPreset: { position: [185, 28, 610], target: [215, 3, 540] },
             description: 'Cây cầu huyết mạch trên Quốc lộ 1A bắc qua sông Bàn Thạch, ranh giới lịch sử giữa Tam Kỳ và Núi Thành.',
           },
           {
             id: 'lang-bun-san',
             name: '🍜 Làng Nghề Bún Sắn Phương Hòa',
             category: 'cultural',
-            cameraPreset: { position: [165, 22, 535], target: [185, 3, 555] },
+            cameraPreset: { position: [165, 22, 625], target: [185, 3, 555] },
             description: 'Làng nghề bún sắn truyền thống với những vỉ phơi bánh sắn vàng ươm, cối xay và lò tráng bánh thủ công.',
           },
         ],
@@ -162,9 +162,8 @@ export class TamXuan1Commune extends BaseWard {
       village.add(house);
 
       // Tile roof
-      const roof = new THREE.Mesh(new THREE.ConeGeometry(6.2, 2.2, 4), tileRoofMat);
-      roof.rotateY(Math.PI / 4);
-      roof.position.set(hx, 3.2 + 1.1 + 0.45, -4.5);
+      const roof = new THREE.Mesh(new THREE.BoxGeometry(8.2, 1.2, 6.2), tileRoofMat);
+      roof.position.set(hx, 3.2 + 0.6 + 0.45, -4.5);
       village.add(roof);
 
       // Bamboo racks for sun-drying cassava vermicelli

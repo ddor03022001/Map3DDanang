@@ -99,12 +99,12 @@ export class ChuLaiPort {
       boom.castShadow = true;
       craneGroup.add(boom);
 
-      // Backstay Tower / Apex
-      const apexGeo = new THREE.ConeGeometry(4, 10, 4);
-      apexGeo.rotateY(Math.PI / 4);
-      const apex = new THREE.Mesh(apexGeo, mat);
-      apex.position.set(-2, 28, 0);
-      craneGroup.add(apex);
+      // Backstay A-frame Tower
+      const backstayMat = new THREE.MeshStandardMaterial({ color: 0x1f2429, metalness: 0.8, roughness: 0.3 });
+      const towerGeo = new THREE.BoxGeometry(2.4, 8.5, 3.2);
+      const tower = new THREE.Mesh(towerGeo, mat);
+      tower.position.set(-2, 27, 0);
+      craneGroup.add(tower);
 
       this.group.add(craneGroup);
     });
@@ -215,11 +215,10 @@ export class ChuLaiPort {
     body.castShadow = true;
     warehouseGroup.add(body);
 
-    // Curved Barrel Roof
-    const roofGeo = new THREE.CylinderGeometry(14, 14, 55.4, 16, 1, false, 0, Math.PI);
-    roofGeo.rotateZ(Math.PI / 2);
+    // Modern Industrial Dual-pitch Roof
+    const roofGeo = new THREE.BoxGeometry(29.2, 1.8, 56.2);
     const roof = new THREE.Mesh(roofGeo, roofMat);
-    roof.position.y = 8;
+    roof.position.y = 8.9;
     roof.castShadow = true;
     warehouseGroup.add(roof);
 

@@ -41,8 +41,8 @@ export const VIEWPOINTS: ViewpointItem[] = [
     id: 'nui-thanh',
     name: 'Huyện Núi Thành',
     districtId: 'nui-thanh',
-    position: [150, 680, 420],
-    target: [150, 0, 770],
+    position: [180, 480, 1150],
+    target: [180, 0, 750],
     info: {
       badge: 'HUYỆN ĐỊA PHƯƠNG',
       title: 'Huyện Núi Thành',
@@ -61,7 +61,7 @@ export const VIEWPOINTS: ViewpointItem[] = [
     id: 'tam-hiep',
     name: 'Xã Tam Hiệp - toàn cảnh',
     districtId: 'nui-thanh',
-    position: [250, 115, 610],
+    position: [250, 115, 830],
     target: [280, 6, 720],
     info: {
       badge: 'XÃ TRỌNG ĐIỂM',
@@ -79,7 +79,7 @@ export const VIEWPOINTS: ViewpointItem[] = [
     id: 'doi-keo-tam-hiep',
     name: 'Rừng đồi keo Tây Tam Hiệp',
     districtId: 'nui-thanh',
-    position: [30, 45, 640],
+    position: [30, 45, 790],
     target: [70, 12, 715],
     info: {
       badge: 'RỪNG NÚI & ĐẤT ĐỎ',
@@ -97,7 +97,7 @@ export const VIEWPOINTS: ViewpointItem[] = [
     id: 'thon-thai-xuan',
     name: 'Thôn Thái Xuân & Chùa Tam Hiệp',
     districtId: 'nui-thanh',
-    position: [110, 26, 625],
+    position: [110, 26, 735],
     target: [142, 4, 680],
     info: {
       badge: 'LÀNG QUÊ TRUYỀN THỐNG',
@@ -115,7 +115,7 @@ export const VIEWPOINTS: ViewpointItem[] = [
     id: 'dam-tom-tam-hiep',
     name: 'Đầm tôm sông Trường Giang',
     districtId: 'nui-thanh',
-    position: [350, 36, 715],
+    position: [350, 36, 810],
     target: [395, 2, 760],
     info: {
       badge: 'THỦY VỰC & NUÔI TÔM',
@@ -133,7 +133,7 @@ export const VIEWPOINTS: ViewpointItem[] = [
     id: 'cay-xuong-rong',
     name: 'Cầu vượt Cây Xương Rồng',
     districtId: 'nui-thanh',
-    position: [205, 45, 660],
+    position: [205, 45, 780],
     target: [220, 4, 720],
     info: {
       badge: 'CÔNG TRÌNH GIAO THÔNG',
@@ -151,7 +151,7 @@ export const VIEWPOINTS: ViewpointItem[] = [
     id: 'thaco-complex',
     name: 'KCN Ô tô THACO',
     districtId: 'nui-thanh',
-    position: [335, 78, 630],
+    position: [335, 78, 810],
     target: [295, 8, 720],
     info: {
       badge: 'KHU CÔNG NGHIỆP',
@@ -169,7 +169,7 @@ export const VIEWPOINTS: ViewpointItem[] = [
     id: 'thaco-mazda',
     name: 'Nhà máy THACO Mazda',
     districtId: 'nui-thanh',
-    position: [305, 38, 675],
+    position: [305, 38, 735],
     target: [315, 6, 685],
     info: {
       badge: 'NHÀ MÁY LẮP RÁP',
@@ -184,7 +184,7 @@ export const VIEWPOINTS: ViewpointItem[] = [
     id: 'cang-chu-lai',
     name: 'Cảng Biển Chu Lai',
     districtId: 'nui-thanh',
-    position: [340, 50, 660],
+    position: [340, 50, 790],
     target: [310, 8, 725],
     info: {
       badge: 'CẢNG BIỂN NƯỚC SÂU',
@@ -202,7 +202,7 @@ export const VIEWPOINTS: ViewpointItem[] = [
     id: 'duong-sat',
     name: 'Đường sắt Bắc Nam',
     districtId: 'nui-thanh',
-    position: [175, 40, 675],
+    position: [175, 40, 760],
     target: [208, 2, 710],
     info: {
       badge: 'HẠ TẦNG GIAO THÔNG',
@@ -216,7 +216,7 @@ export const VIEWPOINTS: ViewpointItem[] = [
     id: 'ubnd-tam-hiep',
     name: 'UBND Xã Tam Hiệp',
     districtId: 'nui-thanh',
-    position: [135, 32, 680],
+    position: [135, 32, 760],
     target: [165, 4, 710],
     info: {
       badge: 'HÀNH CHÍNH XÃ',
@@ -230,7 +230,7 @@ export const VIEWPOINTS: ViewpointItem[] = [
     id: 'cho-tam-hiep',
     name: 'Chợ Tam Hiệp',
     districtId: 'nui-thanh',
-    position: [140, 22, 655],
+    position: [140, 22, 715],
     target: [140, 4, 665],
     info: {
       badge: 'DÂN SINH',
@@ -244,7 +244,7 @@ export const VIEWPOINTS: ViewpointItem[] = [
     id: 'nui-thanh-town',
     name: 'Thị trấn Núi Thành',
     districtId: 'nui-thanh',
-    position: [180, 68, 765],
+    position: [180, 68, 885],
     target: [220, 4, 825],
     info: {
       badge: 'ĐÔ THỊ TRUNG TÂM',
@@ -259,10 +259,28 @@ export const VIEWPOINTS: ViewpointItem[] = [
     },
   },
   {
+    id: 'quang-truong-nui-thanh',
+    name: 'Quảng trường Núi Thành',
+    districtId: 'nui-thanh',
+    position: [205, 42, 855],
+    target: [205, 4, 790],
+    info: {
+      badge: 'QUẢNG TRƯỜNG TRUNG TÂM',
+      title: 'Quảng Trường Núi Thành (24-3)',
+      subtitle: 'Kỳ đài cờ Tổ quốc 16m, Đài phun nước nghệ thuật & Sân khấu ngoài trời',
+      stats: [
+        { label: 'Quy mô', value: 'Quảng trường lễ hội 65m x 48m lát đá granite' },
+        { label: 'Điểm nhấn', value: 'Kỳ đài 16m, Đài phun nước nghệ thuật, Vườn hoa cau vua' },
+      ],
+      description:
+        'Trái tim sinh hoạt cộng đồng và không gian tổ chức các sự kiện văn hóa - chính trị lớn nhất huyện Núi Thành. Nổi bật với kỳ đài cờ đỏ sao vàng tung bay trên nền trời, đài phun nước trung tâm, công viên bồn hoa cau vua và tầm nhìn thoáng đãng hướng ra dòng sông An Tân hiền hòa.',
+    },
+  },
+  {
     id: 'tuong-dai-nui-thanh',
     name: 'Tượng đài Chiến thắng',
     districtId: 'nui-thanh',
-    position: [225, 24, 765],
+    position: [225, 24, 855],
     target: [265, 12, 805],
     info: {
       badge: 'DI TÍCH LỊCH SỬ',
@@ -280,7 +298,7 @@ export const VIEWPOINTS: ViewpointItem[] = [
     id: 'san-bay-chu-lai',
     name: 'Sân bay Quốc tế Chu Lai',
     districtId: 'nui-thanh',
-    position: [220, 58, 885],
+    position: [220, 58, 980],
     target: [280, 2, 930],
     info: {
       badge: 'CẢNG HÀNG KHÔNG',
@@ -298,7 +316,7 @@ export const VIEWPOINTS: ViewpointItem[] = [
     id: 'tam-hai',
     name: 'Xã Đảo Tam Hải & Bàn Than',
     districtId: 'nui-thanh',
-    position: [445, 120, 770],
+    position: [445, 120, 980],
     target: [445, 4, 875],
     info: {
       badge: 'KỲ QUAN BIỂN ĐẢO',
@@ -316,7 +334,7 @@ export const VIEWPOINTS: ViewpointItem[] = [
     id: 'cang-ky-ha',
     name: 'Cảng Kỳ Hà & Bến Cá',
     districtId: 'nui-thanh',
-    position: [290, 50, 810],
+    position: [290, 50, 890],
     target: [320, 4, 840],
     info: {
       badge: 'CẢNG BIỂN & THỦY SẢN',
@@ -333,7 +351,7 @@ export const VIEWPOINTS: ViewpointItem[] = [
     id: 'ho-giang-thom',
     name: 'Thác Hố Giang Thơm (11 Tầng)',
     districtId: 'nui-thanh',
-    position: [-20, 32, 810],
+    position: [-20, 32, 875],
     target: [15, 6, 825],
     info: {
       badge: 'DANH THẮNG NÚI RỪNG',
@@ -351,24 +369,43 @@ export const VIEWPOINTS: ViewpointItem[] = [
     id: 'dinh-hon-tau',
     name: 'Đỉnh Núi Hòn Tàu 953m',
     districtId: 'nui-thanh',
-    position: [-80, 85, 780],
-    target: [-50, 30, 820],
+    position: [-70, 115, 845],
+    target: [-100, 88, 885],
     info: {
       badge: 'ĐỈNH NÚI CAO NHẤT',
-      title: 'Dãy Núi Hòn Tàu (953m)',
-      subtitle: 'Nóc nhà phía Tây che chở Núi Thành',
+      title: 'Đỉnh Núi Hòn Tàu (953m)',
+      subtitle: 'Nóc nhà phía Tây che chở Núi Thành - Đỉnh cao 953m',
       stats: [
         { label: 'Độ cao', value: '953 m so với mực nước biển' },
+        { label: 'Điểm nhấn', value: 'Cột mốc đỉnh núi đá granite & Cờ Tổ quốc' },
       ],
       description:
-        'Dãy núi cao hùng vĩ nhất của huyện Núi Thành, ranh giới tự nhiên giữa đồng bằng ven biển và vùng rừng núi Trường Sơn, quanh năm mây mù bao phủ.',
+        'Đỉnh núi cao hùng vĩ nhất của huyện Núi Thành, ranh giới tự nhiên giữa đồng bằng ven biển và vùng rừng núi Trường Sơn, nơi đặt cột mốc độ cao 953m lộng gió quanh năm mây mù bao phủ.',
+    },
+  },
+  {
+    id: 'ho-tam-son',
+    name: 'Hồ Thủy Lợi Tam Sơn',
+    districtId: 'nui-thanh',
+    position: [32, 42, 660],
+    target: [-60, 12, 712],
+    info: {
+      badge: 'LÒNG HỒ SINH THÁI',
+      title: 'Hồ Thủy Lợi Tam Sơn (Hố Khế)',
+      subtitle: 'Hồ sinh thái trên cao, Đập bê tông xả tràn & Đảo nổi',
+      stats: [
+        { label: 'Cao độ mặt nước', value: '12.0 m trên thung lũng núi' },
+        { label: 'Công trình', value: 'Đập bê tông trọng lực, Bến cano, Đảo thông sinh thái' },
+      ],
+      description:
+        'Hồ nước ngọt lớn nhất huyện Núi Thành nằm ở vùng cao Tây Bắc, sở hữu đập ngăn nước bê tông cốt thép kiên cố, cống xả tràn bậc thang tung bọt trắng xóa, bến thuyền du lịch sinh thái và ốc đảo rừng thông thơ mộng.',
     },
   },
   {
     id: 'song-truong-giang',
     name: 'Sông Trường Giang',
     districtId: 'nui-thanh',
-    position: [450, 60, 710],
+    position: [450, 60, 790],
     target: [430, 2, 740],
     info: {
       badge: 'ĐƯỜNG THỦY TỰ NHIÊN',
@@ -527,7 +564,7 @@ export const NUI_THANH_COMMUNES: ViewpointItem[] = [
     id: 'commune-nui-thanh',
     name: '🏛️ TT. Núi Thành',
     districtId: 'nui-thanh',
-    position: [185, 125, 690],
+    position: [185, 125, 910],
     target: [185, 4, 800],
     info: {
       badge: 'ĐÔ THỊ TRUNG TÂM',
@@ -545,7 +582,7 @@ export const NUI_THANH_COMMUNES: ViewpointItem[] = [
     id: 'commune-tam-hiep',
     name: '🏭 Xã Tam Hiệp',
     districtId: 'nui-thanh',
-    position: [255, 160, 600],
+    position: [255, 160, 860],
     target: [255, 4, 730],
     info: {
       badge: 'TRUNG TÂM CÔNG NGHIỆP',
@@ -563,7 +600,7 @@ export const NUI_THANH_COMMUNES: ViewpointItem[] = [
     id: 'commune-tam-hai',
     name: '🏝️ Xã Tam Hải',
     districtId: 'nui-thanh',
-    position: [445, 140, 765],
+    position: [445, 140, 985],
     target: [445, 2, 875],
     info: {
       badge: 'KỲ QUAN BIỂN ĐẢO',
@@ -581,7 +618,7 @@ export const NUI_THANH_COMMUNES: ViewpointItem[] = [
     id: 'commune-tam-quang',
     name: '🚢 Xã Tam Quang',
     districtId: 'nui-thanh',
-    position: [320, 135, 715],
+    position: [320, 135, 915],
     target: [320, 3, 815],
     info: {
       badge: 'HÀNG HẢI & NGHỀ CÁ',
@@ -599,7 +636,7 @@ export const NUI_THANH_COMMUNES: ViewpointItem[] = [
     id: 'commune-tam-nghia',
     name: '✈️ Xã Tam Nghĩa',
     districtId: 'nui-thanh',
-    position: [270, 160, 840],
+    position: [270, 160, 1070],
     target: [270, 3, 955],
     info: {
       badge: 'CẢNG HÀNG KHÔNG',
@@ -617,26 +654,26 @@ export const NUI_THANH_COMMUNES: ViewpointItem[] = [
     id: 'commune-tam-tra',
     name: '🏔️ Xã Tam Trà',
     districtId: 'nui-thanh',
-    position: [-95, 26, 815],
-    target: [-120, 7, 870],
+    position: [-55, 65, 830],
+    target: [-115, 28, 835],
     info: {
       badge: 'VÙNG CAO ĐỒNG BÀO KOR',
       title: 'Xã Vùng Cao Tam Trà',
-      subtitle: 'Nóc nhà Hòn Tàu 953m, Bản làng nhà sàn & Đồi quế',
+      subtitle: 'Nóc nhà Hòn Tàu 953m, Nhà Rông đồng bào Co & Đồi quế',
       stats: [
         { label: 'Diện tích', value: '97.1 km²' },
-        { label: 'Đặc trưng', value: 'Đỉnh núi Hòn Tàu 953m, Nhà sàn đồng bào Cor, Cầu treo' },
+        { label: 'Đặc trưng', value: 'Đỉnh Hòn Tàu 953m, Nhà Rông mái cong lưỡi rìu, Cột Guu' },
       ],
       description:
-        'Xã vùng cao có diện tích lớn nhất huyện Núi Thành, tựa lưng vào đỉnh Hòn Tàu cao 953m hùng vĩ, những nếp nhà sàn mái tranh mộc mạc của đồng bào Cor, cầu treo dây văng và những đồi quế Trà My ngát hương.',
+        'Xã vùng cao có diện tích tự nhiên lớn nhất huyện Núi Thành, tựa lưng vào đỉnh Hòn Tàu 953m hùng vĩ. Nổi bật với ngôi Nhà Rông truyền thống của đồng bào Co cao vút hình lưỡi rìu, cột Guu lễ hội cồng chiêng, cầu treo dây văng vượt suối Trầu và những cánh rừng quế ngát hương.',
     },
   },
   {
     id: 'commune-tam-my-tay',
     name: '🌊 Xã Tam Mỹ Tây',
     districtId: 'nui-thanh',
-    position: [-10, 40, 790],
-    target: [15, 8, 825],
+    position: [10, 150, 960],
+    target: [15, 28, 825],
     info: {
       badge: 'DANH THẮNG SINH THÁI',
       title: 'Xã Tam Mỹ Tây (Thác Hố Giang Thơm)',
@@ -653,7 +690,7 @@ export const NUI_THANH_COMMUNES: ViewpointItem[] = [
     id: 'commune-tam-my-dong',
     name: '🌾 Xã Tam Mỹ Đông',
     districtId: 'nui-thanh',
-    position: [105, 145, 705],
+    position: [105, 145, 925],
     target: [105, 3, 815],
     info: {
       badge: 'ĐỒNG BẰNG NÔNG NGHIỆP',
@@ -671,7 +708,7 @@ export const NUI_THANH_COMMUNES: ViewpointItem[] = [
     id: 'commune-tam-anh-nam',
     name: '🏗️ Xã Tam Anh Nam',
     districtId: 'nui-thanh',
-    position: [195, 140, 545],
+    position: [195, 140, 785],
     target: [195, 2, 665],
     info: {
       badge: 'CÔNG NGHIỆP & LOGISTICS',
@@ -689,7 +726,7 @@ export const NUI_THANH_COMMUNES: ViewpointItem[] = [
     id: 'commune-tam-anh-bac',
     name: '🏢 Xã Tam Anh Bắc',
     districtId: 'nui-thanh',
-    position: [200, 140, 480],
+    position: [200, 140, 720],
     target: [200, 2, 600],
     info: {
       badge: 'CÔNG NGHIỆP SINH THÁI',
@@ -707,26 +744,26 @@ export const NUI_THANH_COMMUNES: ViewpointItem[] = [
     id: 'commune-tam-son',
     name: '💧 Xã Tam Sơn',
     districtId: 'nui-thanh',
-    position: [-80, 140, 590],
-    target: [-80, 4, 710],
+    position: [32, 42, 660],
+    target: [-60, 12, 712],
     info: {
       badge: 'LÒNG HỒ THỦY LỢI',
       title: 'Xã Tam Sơn',
-      subtitle: 'Hồ thủy lợi mênh mông, Đập tràn & Ốc đảo xanh',
+      subtitle: 'Hồ thủy lợi trên cao, Đập tràn bê tông & Ốc đảo xanh',
       stats: [
         { label: 'Diện tích', value: '54.2 km²' },
-        { label: 'Đặc trưng', value: 'Lòng hồ chứa nước ngọt, Đập tràn xả lũ, Đảo nổi sinh thái' },
+        { label: 'Đặc trưng', value: 'Lòng hồ Hố Khế (12m), Đập bê tông cốt thép, Đảo nổi rừng thông' },
       ],
       description:
-        'Vùng hồ thủy lợi rộng lớn nhất huyện dự trữ nguồn nước ngọt quý giá cho đời sống và công nghiệp Chu Lai, cảnh quan lòng hồ thơ mộng với những hòn đảo nhỏ và cánh rừng bán ngập xanh tươi.',
+        'Vùng hồ sinh thái nước ngọt lớn nhất huyện với Hồ chứa nước Hố Khế ở cao độ 12m, công trình đập ngăn nước bê tông cốt thép kiên cố và cống xả tràn bậc thang, bến cano du lịch cùng ốc đảo nổi rừng thông thơ mộng giữa mây ngàn.',
     },
   },
   {
     id: 'commune-tam-thanh',
     name: '🌲 Xã Tam Thạnh',
     districtId: 'nui-thanh',
-    position: [65, 165, 510],
-    target: [65, 4, 645],
+    position: [65, 165, 780],
+    target: [65, 24, 645],
     info: {
       badge: 'RỪNG NGUYÊN LIỆU & HỒ',
       title: 'Xã Tam Thạnh',
@@ -743,7 +780,7 @@ export const NUI_THANH_COMMUNES: ViewpointItem[] = [
     id: 'commune-tam-tien',
     name: '🌅 Xã Tam Tiến',
     districtId: 'nui-thanh',
-    position: [350, 155, 435],
+    position: [350, 155, 685],
     target: [350, 2, 560],
     info: {
       badge: 'DU LỊCH BIỂN & CHỢ CÁ',
@@ -761,7 +798,7 @@ export const NUI_THANH_COMMUNES: ViewpointItem[] = [
     id: 'commune-tam-hoa',
     name: '🌉 Xã Tam Hòa',
     districtId: 'nui-thanh',
-    position: [330, 150, 530],
+    position: [330, 150, 780],
     target: [330, 2, 655],
     info: {
       badge: 'SÔNG NƯỚC LỢ & NUÔI THỦY SẢN',
@@ -779,7 +816,7 @@ export const NUI_THANH_COMMUNES: ViewpointItem[] = [
     id: 'commune-tam-giang',
     name: '🌴 Xã Tam Giang',
     districtId: 'nui-thanh',
-    position: [275, 130, 700],
+    position: [275, 130, 910],
     target: [275, 2, 805],
     info: {
       badge: 'CỬA SÔNG & RỪNG DỪA',
@@ -797,7 +834,7 @@ export const NUI_THANH_COMMUNES: ViewpointItem[] = [
     id: 'commune-tam-xuan-1',
     name: '🍜 Xã Tam Xuân 1',
     districtId: 'nui-thanh',
-    position: [195, 145, 415],
+    position: [195, 145, 655],
     target: [195, 2, 535],
     info: {
       badge: 'CỬA NGÕ BẮC NÚI THÀNH',
@@ -815,7 +852,7 @@ export const NUI_THANH_COMMUNES: ViewpointItem[] = [
     id: 'commune-tam-xuan-2',
     name: '🥬 Xã Tam Xuân 2',
     districtId: 'nui-thanh',
-    position: [90, 150, 410],
+    position: [90, 150, 660],
     target: [90, 2, 535],
     info: {
       badge: 'NÔNG NGHIỆP CÔNG NGHỆ CAO',

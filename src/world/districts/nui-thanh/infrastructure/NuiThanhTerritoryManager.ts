@@ -170,8 +170,8 @@ export const NUI_THANH_COMMUNE_BOUNDARIES: CommuneBoundaryData[] = [
     ],
     color: 0x558b2f,
     elevatedCamera: {
-      position: [55, 165, 510],
-      target: [55, 4, 640],
+      position: [55, 175, 510],
+      target: [55, 25, 640],
     },
   },
   {
@@ -192,8 +192,8 @@ export const NUI_THANH_COMMUNE_BOUNDARIES: CommuneBoundaryData[] = [
     ],
     color: 0x00838f,
     elevatedCamera: {
-      position: [-80, 140, 600],
-      target: [-80, 4, 710],
+      position: [32, 42, 660],
+      target: [-60, 12, 712],
     },
   },
 
@@ -340,8 +340,8 @@ export const NUI_THANH_COMMUNE_BOUNDARIES: CommuneBoundaryData[] = [
     ],
     color: 0x33691e,
     elevatedCamera: {
-      position: [10, 115, 720],
-      target: [10, 6, 825],
+      position: [10, 150, 960],
+      target: [10, 30, 825],
     },
   },
   {
@@ -361,8 +361,8 @@ export const NUI_THANH_COMMUNE_BOUNDARIES: CommuneBoundaryData[] = [
     ],
     color: 0x1b5e20,
     elevatedCamera: {
-      position: [-120, 150, 760],
-      target: [-120, 16, 875],
+      position: [-55, 65, 830],
+      target: [-115, 28, 835],
     },
   },
   {
@@ -401,17 +401,12 @@ export class NuiThanhTerritoryManager {
 
   private districtBoundaryLine!: THREE.Line;
   private communeLinesGroup = new THREE.Group();
-  private communeFillsGroup = new THREE.Group();
-  private hamletsGroup = new THREE.Group();
-
-  private activeCommuneMesh: THREE.Mesh | null = null;
 
   constructor() {
     this.buildDistrictOuterBoundary();
     this.buildCommuneBoundaries();
 
     this.group.add(this.communeLinesGroup);
-    this.group.add(this.communeFillsGroup);
   }
 
   /**
@@ -468,51 +463,27 @@ export class NuiThanhTerritoryManager {
       loopPts.push(loopPts[0]); // close loop
 
       const lineGeo = new THREE.BufferGeometry().setFromPoints(loopPts);
-      const line = new THREE.Line(lineGeo, lineMat);
+      const line = new THREE.Line(lineGeo, lineMat.clone());
+      line.userData = { communeId: commune.id };
       this.communeLinesGroup.add(line);
-
-      // Create 2D Shape Fill Plane
-      const shape = new THREE.Shape();
-      commune.polygon.forEach(([x, z], idx) => {
-        if (idx === 0) shape.moveTo(x, z);
-        else shape.lineTo(x, z);
-      });
-      shape.closePath();
-
-      const fillGeo = new THREE.ShapeGeometry(shape);
-      fillGeo.rotateX(-Math.PI / 2);
-
-      const fillMat = new THREE.MeshBasicMaterial({
-        color: commune.color,
-        transparent: true,
-        opacity: 0.04,
-        side: THREE.DoubleSide,
-        depthWrite: false,
-      });
-
-      const fillMesh = new THREE.Mesh(fillGeo, fillMat);
-      fillMesh.position.y = 0.50;
-      fillMesh.userData = { communeId: commune.id, color: commune.color };
-      this.communeFillsGroup.add(fillMesh);
     });
   }
 
   /**
-   * Highlights the selected commune with a luminous gold glow
+   * Highlights the selected commune border line with an elegant golden glow
    */
   public highlightCommune(communeId: string): void {
-    if (this.activeCommuneMesh) {
-      (this.activeCommuneMesh.material as THREE.MeshBasicMaterial).opacity = 0.04;
-      this.activeCommuneMesh = null;
-    }
-
-    const targetMesh = this.communeFillsGroup.children.find(
-      (child) => child.userData.communeId === communeId
-    ) as THREE.Mesh;
-
-    if (targetMesh) {
-      (targetMesh.material as THREE.MeshBasicMaterial).opacity = 0.18;
-      this.activeCommuneMesh = targetMesh;
-    }
+    this.communeLinesGroup.children.forEach((child) => {
+      if (child instanceof THREE.Line) {
+        const mat = child.material as THREE.LineBasicMaterial;
+        if (child.userData.communeId === communeId) {
+          mat.color.setHex(0xffd700); // Luminous gold
+          mat.opacity = 1.0;
+        } else {
+          mat.color.setHex(0xc8b488); // Soft vintage gold
+          mat.opacity = 0.55;
+        }
+      }
+    });
   }
 }

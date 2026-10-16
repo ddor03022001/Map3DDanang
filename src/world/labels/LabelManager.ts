@@ -53,7 +53,7 @@ export class LabelManager {
         id: 'hon-tau',
         text: 'Hòn Tàu (Tây Núi Thành) 953 m',
         subtext: 'Xã Tam Trà - Đại ngàn rừng nguyên sinh',
-        position: [-100, 98, 860],
+        position: [-100, 98, 885],
         isMountainPeak: true,
       },
       {
@@ -100,20 +100,32 @@ export class LabelManager {
         id: 'ho-giang-thom',
         text: 'Thác Hố Giang Thơm (11 Tầng)',
         subtext: 'Kiệt tác thiên nhiên • Xã Tam Mỹ Tây',
-        position: [15, 20, 825],
+        position: [25, 44, 840],
         isMountainPeak: true,
       },
       {
         id: 'tam-son-reservoir',
         text: 'Lòng Hồ Thủy Lợi Tam Sơn',
-        subtext: 'Hồ sinh thái mênh mông • Xã Tam Sơn',
-        position: [-60, 16, 710],
+        subtext: 'Đập tràn xả lũ & Bến cano • Xã Tam Sơn',
+        position: [-65, 22, 712],
+      },
+      {
+        id: 'quang-truong-nui-thanh',
+        text: 'Quảng Trường Núi Thành',
+        subtext: 'Kỳ đài cờ Tổ quốc 16m & Đài phun nước',
+        position: [205, 16, 790],
+      },
+      {
+        id: 'tuong-dai-nui-thanh',
+        text: 'Tượng Đài Chiến Thắng Núi Thành',
+        subtext: 'Di tích lịch sử Quốc gia 26/5/1965',
+        position: [265, 20, 805],
       },
       {
         id: 'nui-thanh-town',
         text: 'Thị Trấn Núi Thành',
-        subtext: 'Trung tâm hành chính bên sông An Tân',
-        position: [195, 18, 800],
+        subtext: 'Đô thị sông An Tân & Cầu QL1A',
+        position: [185, 20, 830],
       },
 
       // 3. Toàn bộ 17 Đơn vị Hành chính Xã/Thị Trấn (Đặt đúng tâm địa lý, kèm diện tích chuẩn)
@@ -157,7 +169,7 @@ export class LabelManager {
         id: 'label-tam-thanh',
         text: 'Xã Tam Thạnh (53.9 km²)',
         subtext: 'Hồ chứa nước Thái Xuân & Rừng keo',
-        position: [65, 18, 645],
+        position: [65, 42, 645],
       },
       {
         id: 'label-tam-son',
@@ -199,13 +211,13 @@ export class LabelManager {
         id: 'label-tam-my-tay',
         text: 'Xã Tam Mỹ Tây (50.6 km²)',
         subtext: 'Thác Hố Giang Thơm 11 tầng',
-        position: [15, 20, 825],
+        position: [-15, 48, 810],
       },
       {
         id: 'label-tam-tra',
         text: 'Xã Tam Trà (97.1 km²)',
         subtext: 'Đỉnh Hòn Tàu 953m • Bản làng Cor',
-        position: [-80, 22, 860],
+        position: [-100, 85, 870],
       },
       {
         id: 'label-tam-nghia',
@@ -240,17 +252,17 @@ export class LabelManager {
       this.labelSprites.push(sprite);
       this.group.add(sprite);
 
-      // Add a tiny delicate vertical pin line from ground to label
-      if (label.position[1] > 10) {
+      // Add a delicate antique bronze vertical pin stalk from ground to label
+      if (label.position[1] > 8) {
         const pinPoints = [
-          new THREE.Vector3(label.position[0], 0.5, label.position[2]),
-          new THREE.Vector3(label.position[0], label.position[1] - 2.5, label.position[2]),
+          new THREE.Vector3(label.position[0], 0.8, label.position[2]),
+          new THREE.Vector3(label.position[0], label.position[1] - 1.8, label.position[2]),
         ];
         const pinGeo = new THREE.BufferGeometry().setFromPoints(pinPoints);
         const pinMat = new THREE.LineBasicMaterial({
-          color: label.isMountainPeak ? 0xffc107 : 0x00bcd4,
+          color: label.isMountainPeak ? 0x8b263e : 0xc29b38,
           transparent: true,
-          opacity: 0.5,
+          opacity: 0.55,
         });
         const pinLine = new THREE.Line(pinGeo, pinMat);
         this.group.add(pinLine);
@@ -260,32 +272,44 @@ export class LabelManager {
 
   private createLabelSprite(data: FloatingLabelPOI): THREE.Sprite {
     const canvas = document.createElement('canvas');
-    canvas.width = 512;
+    canvas.width = 640;
     canvas.height = 140;
     const ctx = canvas.getContext('2d')!;
 
-    // Rounded Pill Badge Background
     const isPeak = data.isMountainPeak;
-    ctx.fillStyle = isPeak ? 'rgba(25, 30, 40, 0.90)' : 'rgba(252, 249, 242, 0.92)';
-    ctx.roundRect(14, 14, 484, 112, 24);
-    ctx.fill();
 
-    // Border
-    ctx.lineWidth = 3.5;
-    ctx.strokeStyle = isPeak ? '#ffb300' : '#0097a7';
-    ctx.stroke();
-
-    // Text: Primary Title
-    ctx.font = 'bold 34px "Segoe UI", Roboto, sans-serif';
-    ctx.fillStyle = isPeak ? '#ffffff' : '#1c2430';
+    // DuAnCuuLong signature: Classical cartographic serif typography with creamy halo
     ctx.textAlign = 'center';
-    ctx.fillText(data.text, 256, data.subtext ? 60 : 76);
+    ctx.textBaseline = 'middle';
 
-    // Subtext
+    // Soft parchment text halo
+    ctx.lineJoin = 'round';
+    ctx.miterLimit = 2;
+
+    // Primary Label Text
+    ctx.font = isPeak
+      ? 'italic bold 36px "EB Garamond", "Times New Roman", Georgia, serif'
+      : 'italic 600 34px "EB Garamond", "Times New Roman", Georgia, serif';
+
+    // White/Cream Halo stroke
+    ctx.strokeStyle = 'rgba(255, 252, 246, 0.96)';
+    ctx.lineWidth = 7;
+    const posY = data.subtext ? 50 : 70;
+    ctx.strokeText(data.text, 320, posY);
+
+    // Ink Text Fill
+    ctx.fillStyle = isPeak ? '#5e1928' : '#221a12';
+    ctx.fillText(data.text, 320, posY);
+
+    // Subtext (if present)
     if (data.subtext) {
-      ctx.font = '500 22px "Segoe UI", Roboto, sans-serif';
-      ctx.fillStyle = isPeak ? '#ffd54f' : '#006064';
-      ctx.fillText(data.subtext, 256, 98);
+      ctx.font = '500 22px "EB Garamond", "Times New Roman", serif';
+      ctx.strokeStyle = 'rgba(255, 252, 246, 0.94)';
+      ctx.lineWidth = 5;
+      ctx.strokeText(data.subtext, 320, 92);
+
+      ctx.fillStyle = isPeak ? '#8a3c4f' : '#635343';
+      ctx.fillText(data.subtext, 320, 92);
     }
 
     const tex = new THREE.CanvasTexture(canvas);
@@ -294,16 +318,16 @@ export class LabelManager {
     const spriteMat = new THREE.SpriteMaterial({
       map: tex,
       transparent: true,
-      depthTest: true, // Respects 3D depth to eliminate visual clutter
+      depthTest: false, // Ensures labels stay crisp and never clipped by buildings
       depthWrite: false,
     });
 
     const sprite = new THREE.Sprite(spriteMat);
     sprite.position.set(...data.position);
 
-    // Refined compact scale
-    const scaleX = data.isMountainPeak ? 26 : 22;
-    const scaleY = scaleX * (140 / 512);
+    // Prominent cartographic scale (duancuulong.com standard)
+    const scaleX = isPeak ? 54 : 44;
+    const scaleY = scaleX * (140 / 640);
     sprite.scale.set(scaleX, scaleY, 1);
 
     return sprite;

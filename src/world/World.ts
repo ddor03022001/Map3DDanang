@@ -20,6 +20,7 @@ export class World {
   public environment: Environment;
   public terrain: Terrain;
   public water: Water;
+  public daNangUrbanGroup: THREE.Group;
   public cityGrid: CityGrid;
   public buildings: Buildings;
   public vegetation: Vegetation;
@@ -44,23 +45,25 @@ export class World {
     this.water = new Water();
     this.group.add(this.water.group);
 
-    // 4. Urban Road Arteries & Streetlamps
+    // 4, 5, 6, 7. Da Nang Core Urban Center (City Grid, Buildings, Riverside Promenade, Bridges)
+    this.daNangUrbanGroup = new THREE.Group();
     this.cityGrid = new CityGrid();
-    this.group.add(this.cityGrid.group);
+    this.daNangUrbanGroup.add(this.cityGrid.group);
 
-    // 5. Instanced City Buildings with Night Window Glow
     this.buildings = new Buildings();
-    this.group.add(this.buildings.group);
+    this.daNangUrbanGroup.add(this.buildings.group);
 
-    // 6. Riverside Shade Trees & Coastal Palm Groves
     this.vegetation = new Vegetation();
-    this.group.add(this.vegetation.group);
+    this.daNangUrbanGroup.add(this.vegetation.group);
 
-    // 7. Iconic Da Nang Landmarks (Dragon Bridge, Han Bridge, Admin Center, Thuan Phuoc)
     this.landmarks = new LandmarkManager();
-    this.group.add(this.landmarks.group);
+    this.daNangUrbanGroup.add(this.landmarks.group);
 
-    // 8. Modular Provincial Districts (Hai Chau, Son Tra, Ngu Hanh Son, Hoa Vang / Ba Na)
+    // Keep distant Da Nang hidden when focused on Nui Thanh to maintain pristine antique atlas aesthetic
+    this.daNangUrbanGroup.visible = false;
+    this.group.add(this.daNangUrbanGroup);
+
+    // 8. Modular Provincial Districts (Hai Chau, Son Tra, Ngu Hanh Son, Hoa Vang / Ba Na, Nui Thanh)
     this.districtManager = new DistrictManager();
     this.group.add(this.districtManager.group);
 
@@ -79,6 +82,12 @@ export class World {
 
   public setTimeOfDay(time: TimeOfDay): void {
     this.environment.setTimeOfDay(time);
+  }
+
+  public setDistrictFocus(districtId: string): void {
+    const isDaNang = districtId !== 'nui-thanh';
+    this.daNangUrbanGroup.visible = isDaNang;
+    this.water.setDaNangWaterVisible(isDaNang);
   }
 
   public update(delta: number, elapsed: number): void {

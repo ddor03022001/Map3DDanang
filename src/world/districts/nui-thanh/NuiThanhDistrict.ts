@@ -18,6 +18,7 @@ import { TamXuan1Commune } from './communes/TamXuan1Commune';
 import { TamXuan2Commune } from './communes/TamXuan2Commune';
 import { NuiThanhRoadNetwork } from './infrastructure/NuiThanhRoadNetwork';
 import { NuiThanhTerritoryManager } from './infrastructure/NuiThanhTerritoryManager';
+import { NuiThanhLandscapeManager } from './infrastructure/NuiThanhLandscapeManager';
 
 /**
  * Huyện Núi Thành (Khu Kinh Tế Mở Chu Lai - Tỉnh Quảng Nam / Đà Nẵng Mới)
@@ -60,6 +61,7 @@ export class NuiThanhDistrict extends BaseDistrict {
   public tamXuan1Commune: TamXuan1Commune;
   public tamXuan2Commune: TamXuan2Commune;
   public territoryManager: NuiThanhTerritoryManager;
+  public landscapeManager: NuiThanhLandscapeManager;
 
   constructor() {
     super(
@@ -74,8 +76,8 @@ export class NuiThanhDistrict extends BaseDistrict {
           lng: 108.6472,
         },
         cameraPreset: {
-          position: [180, 420, 420],
-          target: [200, 0, 780],
+          position: [200, 360, 1120],
+          target: [200, 0, 760],
         },
       },
       {
@@ -93,6 +95,10 @@ export class NuiThanhDistrict extends BaseDistrict {
     // 2. Mạng lưới hạ tầng giao thông kết nối đồng bộ toàn huyện
     this.roadNetwork = new NuiThanhRoadNetwork();
     this.group.add(this.roadNetwork.group);
+
+    // 2.1 Mạng lưới thảm thực vật tự nhiên, khu dân cư 17 xã và dòng xe chuyển động
+    this.landscapeManager = new NuiThanhLandscapeManager();
+    this.group.add(this.landscapeManager.group);
 
     // 3. Toàn bộ 17 đơn vị hành chính cấp xã / thị trấn
     this.nuiThanhTown = new NuiThanhTown();
@@ -139,6 +145,9 @@ export class NuiThanhDistrict extends BaseDistrict {
   }
 
   public update(delta: number, elapsed: number, nightGlowIntensity: number): void {
+    if (this.landscapeManager) {
+      this.landscapeManager.update(delta, elapsed);
+    }
     super.update(delta, elapsed, nightGlowIntensity);
   }
 }

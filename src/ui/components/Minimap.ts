@@ -88,7 +88,7 @@ export class Minimap {
 
         if (id === 'tam-hiep') {
           // Fly directly to Tam Hiep high-altitude satellite panorama
-          this.cameraManager.flyTo([250, 95, 620], [280, 6, 720]);
+          this.cameraManager.flyTo([250, 95, 820], [280, 6, 720]);
           this.onDistrictSelect?.('tam-hiep');
           return;
         }

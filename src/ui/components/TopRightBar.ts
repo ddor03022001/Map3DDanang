@@ -93,4 +93,12 @@ export class TopRightBar {
       langBtn.querySelector('span')!.textContent = this.currentLang === 'VI' ? 'EN' : 'VI';
     });
   }
+
+  public update(): void {
+    const azimuth = this.cameraManager.controls.getAzimuthalAngle();
+    const compassSvg = this.element.querySelector<SVGElement>('#dcl-compass-btn svg');
+    if (compassSvg) {
+      compassSvg.style.transform = `rotate(${-azimuth}rad)`;
+    }
+  }
 }

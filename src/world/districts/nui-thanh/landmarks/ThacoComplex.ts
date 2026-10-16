@@ -35,12 +35,12 @@ export class ThacoComplex {
     const archGroup = new THREE.Group();
     const thacoBlueMat = new THREE.MeshStandardMaterial({
       color: 0x004d9c, // Signature THACO corporate blue
-      metalness: 0.7,
+      metalness: 0.6,
       roughness: 0.3,
     });
     const whiteMat = new THREE.MeshStandardMaterial({
       color: 0xf5f7fa,
-      metalness: 0.6,
+      metalness: 0.5,
       roughness: 0.25,
     });
 
@@ -53,7 +53,7 @@ export class ThacoComplex {
       archGroup.add(pylon);
     });
 
-    // Overhead curved portal lintel
+    // Overhead portal lintel
     const lintelGeo = new THREE.BoxGeometry(18, 1.4, 2.2);
     const lintel = new THREE.Mesh(lintelGeo, whiteMat);
     lintel.position.set(0, 9.5, 0);
@@ -68,7 +68,7 @@ export class ThacoComplex {
     ctx.fillStyle = '#004d9c';
     ctx.fillRect(0, 0, 256, 64);
     ctx.fillStyle = '#ffffff';
-    ctx.font = 'bold 34px sans-serif';
+    ctx.font = 'bold 32px sans-serif';
     ctx.textAlign = 'center';
     ctx.fillText('THACO CHU LAI', 128, 44);
 
@@ -84,29 +84,43 @@ export class ThacoComplex {
 
   /**
    * 2. Massive Industrial Assembly Plants (Nhà máy THACO Mazda, KIA, Bus, Truck)
+   * Realistic modern industrial architecture:
+   * - Crisp light grey insulated sandwich-panel walls
+   * - Low-pitch dual-slope gable metal roofs with dark blue eaves and trim
+   * - Rooftop photovoltaic solar arrays
+   * - Roll-up truck loading bays
    */
   private buildAssemblyPlants(): void {
     const wallMat = new THREE.MeshStandardMaterial({
-      color: 0xd8e0e8, // Insulated sandwich panel off-white
-      roughness: 0.7,
-      metalness: 0.2,
+      color: 0xe2e7ed, // Light industrial off-white
+      roughness: 0.65,
+      metalness: 0.15,
     });
     const solarMat = new THREE.MeshStandardMaterial({
-      color: 0x122a45, // Deep navy photovoltaic solar cells
-      roughness: 0.2,
-      metalness: 0.85,
-    });
-    const ventMat = new THREE.MeshStandardMaterial({
-      color: 0xc4cdd5,
+      color: 0x142b45, // Deep navy photovoltaic solar cells
+      roughness: 0.25,
       metalness: 0.8,
-      roughness: 0.3,
+    });
+    const trimMat = new THREE.MeshStandardMaterial({
+      color: 0x004d9c, // Signature THACO blue facade band
+      roughness: 0.4,
+      metalness: 0.4,
+    });
+    const roofMat = new THREE.MeshStandardMaterial({
+      color: 0x9aa4af, // Galvanized metal roof sheets
+      roughness: 0.7,
+      metalness: 0.3,
+    });
+    const dockMat = new THREE.MeshStandardMaterial({
+      color: 0x3d444a,
+      roughness: 0.5,
     });
 
     const plants = [
-      { name: 'THACO MAZDA', x: 25, z: -35, length: 78, width: 44, height: 8.5, roofColor: 0x25445e },
-      { name: 'THACO KIA', x: 25, z: 35, length: 68, width: 40, height: 7.8, roofColor: 0x364858 },
-      { name: 'THACO BUS & TRUCK', x: 110, z: -35, length: 82, width: 46, height: 9.0, roofColor: 0x223d54 },
-      { name: 'THACO INDUSTRIES', x: 110, z: 35, length: 72, width: 42, height: 7.5, roofColor: 0x2e4252 },
+      { name: 'THACO MAZDA', x: 25, z: -35, length: 78, width: 44, height: 6.5 },
+      { name: 'THACO KIA', x: 25, z: 35, length: 68, width: 40, height: 6.2 },
+      { name: 'THACO BUS & TRUCK', x: 110, z: -35, length: 82, width: 46, height: 7.0 },
+      { name: 'THACO INDUSTRIES', x: 110, z: 35, length: 72, width: 42, height: 6.0 },
     ];
 
     plants.forEach((plant) => {
@@ -120,51 +134,53 @@ export class ThacoComplex {
       wall.receiveShadow = true;
       plantGroup.add(wall);
 
-      // Curved industrial roof
-      const plantRoofMat = new THREE.MeshStandardMaterial({
-        color: plant.roofColor,
-        roughness: 0.6,
-        metalness: 0.3,
-      });
-
-      const roofGeo = new THREE.CylinderGeometry(
-        plant.width * 0.55,
-        plant.width * 0.55,
-        plant.length,
-        16,
-        1,
-        false,
-        0,
-        Math.PI
+      // Signature Blue Corporate Facade Band
+      const bandHeight = 1.0;
+      const band = new THREE.Mesh(
+        new THREE.BoxGeometry(plant.length + 0.2, bandHeight, plant.width + 0.2),
+        trimMat
       );
-      roofGeo.rotateZ(Math.PI / 2);
-      const roof = new THREE.Mesh(roofGeo, plantRoofMat);
-      roof.position.y = plant.height;
+      band.position.y = plant.height - bandHeight / 2;
+      plantGroup.add(band);
+
+      // Realistic Low-Pitch Dual-Slope Industrial Gable Roof
+      // Triangular prism roof geometry
+      const roofPeakRise = 2.4;
+      const roofShape = new THREE.Shape();
+      roofShape.moveTo(-plant.width / 2 - 0.4, 0);
+      roofShape.lineTo(0, roofPeakRise);
+      roofShape.lineTo(plant.width / 2 + 0.4, 0);
+      roofShape.closePath();
+
+      const extrudeSettings = {
+        steps: 1,
+        depth: plant.length + 0.8,
+        bevelEnabled: false,
+      };
+      const roofGeo = new THREE.ExtrudeGeometry(roofShape, extrudeSettings);
+      roofGeo.rotateY(Math.PI / 2);
+      roofGeo.translate(plant.length / 2 + 0.4, plant.height, 0);
+
+      const roof = new THREE.Mesh(roofGeo, roofMat);
       roof.castShadow = true;
       plantGroup.add(roof);
 
-      // Rooftop Photovoltaic Solar Arrays (Pin năng lượng mặt trời trên mái xưởng)
-      const solarCols = 6;
+      // Rooftop Photovoltaic Solar Panels
+      const solarCols = 5;
       for (let s = 0; s < solarCols; s++) {
-        const sx = -plant.length * 0.38 + (s * plant.length * 0.76) / (solarCols - 1);
-        const solarPanel = new THREE.Mesh(
-          new THREE.PlaneGeometry(plant.length * 0.12, plant.width * 0.45),
-          solarMat
-        );
-        solarPanel.rotateX(-Math.PI / 2);
-        solarPanel.position.set(sx, plant.height + plant.width * 0.52, 0);
-        plantGroup.add(solarPanel);
+        const sx = -plant.length * 0.36 + (s * plant.length * 0.72) / (solarCols - 1);
+        [-plant.width * 0.25, plant.width * 0.25].forEach((sz) => {
+          const solarPanel = new THREE.Mesh(
+            new THREE.PlaneGeometry(plant.length * 0.12, plant.width * 0.38),
+            solarMat
+          );
+          solarPanel.rotateX(-Math.PI / 2 + (sz > 0 ? -0.11 : 0.11));
+          solarPanel.position.set(sx, plant.height + roofPeakRise * 0.6, sz);
+          plantGroup.add(solarPanel);
+        });
       }
 
-      // Industrial Roof Turbovents (Quạt thông gió công nghiệp)
-      for (let v = 0; v < 4; v++) {
-        const vx = -plant.length * 0.3 + (v * plant.length * 0.6) / 3;
-        const vent = new THREE.Mesh(new THREE.CylinderGeometry(0.8, 1.0, 1.2, 8), ventMat);
-        vent.position.set(vx, plant.height + plant.width * 0.54, 0);
-        plantGroup.add(vent);
-      }
-
-      // Facade Signage Banner (Biển tên nhà máy THACO)
+      // Facade Signage Banner
       const bannerCanvas = document.createElement('canvas');
       bannerCanvas.width = 512;
       bannerCanvas.height = 96;
@@ -181,18 +197,17 @@ export class ThacoComplex {
 
       const bannerTex = new THREE.CanvasTexture(bannerCanvas);
       const bannerMesh = new THREE.Mesh(
-        new THREE.PlaneGeometry(16, 3.2),
+        new THREE.PlaneGeometry(16, 3.0),
         new THREE.MeshBasicMaterial({ map: bannerTex })
       );
-      bannerMesh.position.set(0, plant.height * 0.8, plant.width / 2 + 0.15);
+      bannerMesh.position.set(0, plant.height * 0.75, plant.width / 2 + 0.15);
       plantGroup.add(bannerMesh);
 
       // Loading Dock Bay Doors on side wall
-      const dockMat = new THREE.MeshStandardMaterial({ color: 0x3d444a, roughness: 0.5 });
       for (let d = -2; d <= 2; d++) {
-        const dockDoor = new THREE.Mesh(new THREE.PlaneGeometry(4.0, 4.0), dockMat);
+        const dockDoor = new THREE.Mesh(new THREE.PlaneGeometry(3.6, 3.6), dockMat);
         dockDoor.rotateY(Math.PI / 2);
-        dockDoor.position.set(plant.length / 2 + 0.1, 2.0, d * 7.0);
+        dockDoor.position.set(plant.length / 2 + 0.1, 1.8, d * 6.5);
         plantGroup.add(dockDoor);
       }
 

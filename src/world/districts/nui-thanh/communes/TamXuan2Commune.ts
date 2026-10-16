@@ -28,14 +28,14 @@ export class TamXuan2Commune extends BaseWard {
             id: 'nong-nghiep-tam-xuan-2',
             name: '🌱 Khu Nông Nghiệp Công Nghệ Cao',
             category: 'nature',
-            cameraPreset: { position: [75, 28, 520], target: [95, 4, 540] },
+            cameraPreset: { position: [75, 28, 610], target: [95, 4, 540] },
             description: 'Khu nhà màng công nghệ cao trồng rau thủy canh, dưa lưới và hoa màu năng suất cao.',
           },
           {
             id: 'che-bien-dam-go',
             name: '🪵 Xưởng Chế Biến Lâm Sản & Dăm Gỗ',
             category: 'building',
-            cameraPreset: { position: [55, 26, 530], target: [70, 4, 550] },
+            cameraPreset: { position: [55, 26, 620], target: [70, 4, 550] },
             description: 'Khu xưởng bóc gỗ, sân phơi dăm keo tràm phục vụ xuất khẩu qua cảng Kỳ Hà.',
           },
         ],
@@ -73,10 +73,8 @@ export class TamXuan2Commune extends BaseWard {
         gh.castShadow = true;
         ghGroup.add(gh);
 
-        const roof = new THREE.Mesh(new THREE.ConeGeometry(10, 2.4, 4), frameMat);
-        roof.rotateY(Math.PI / 4);
-        roof.position.set(gx, 4.8 + 1.2, gz);
-        roof.scale.set(1.4, 1, 0.95);
+        const roof = new THREE.Mesh(new THREE.BoxGeometry(18.5, 1.2, 12.5), frameMat);
+        roof.position.set(gx, 4.8 + 0.6, gz);
         ghGroup.add(roof);
       });
     });
